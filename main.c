@@ -6,11 +6,12 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 15:14:24 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/12 17:15:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/13 19:13:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "libftprintf.h"
 
 int main(void)
 {
@@ -27,8 +28,11 @@ int main(void)
     printf("CONVERSIONS\nc:\nint to unsigned char conversion. The resulting character is written.\n");
     printf("example: %i becomes %c\n", num, num);
     printf("testcase: %ic\n", lol);
-    result = printf("testcase save to int variable result %i\n",2147483648);
+    result = printf("testcase save to int variable result %i\n",2147483646);
     printf("%i\n", result);
+    printf("TESTING MY OWN PRINTF FROM HERE\n");
+    result = ft_printf("test case\n");
+    printf("result of ft_printf: %i\n", result);
     return (0);
 
 }
