@@ -6,44 +6,61 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/13 19:37:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/17 23:15:00 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include <stdarg.h>
 
-t_conflags	is_conflags(const char *str)
-{
-	t_conflags	conflags;
-	int			i;
-
-	if (str[i] == '0')
-		conflags.zero = 1;
-	if (str[i] == '-')
-		conflags.negative = 1;
-	if (str[i] == '*')
-		conflags.astrix = 1;
-	if (str[i] == '.')
-		conflags.period = 1;
-		
-	}
-	return (conflags);
-}
-
 int			ft_printf(const char *format, ...)
 {
-	char		*line;
+	va_list		argp;
 	int			i;
-	t_conflags	conflags;
+	char		print;
 
+	va_start(argp, format);
 	i = 0;
 	while (format[i] != '\0')
 	{
-		conflags = is_conflags(format[i] + 1);//check for flags and conversion
-		i++;
+		if(format[i] == '%')
+		{
+			i++;
+			if (format[i] == '%')
+				ft_putchar('%');
+			else if (format[i] == 'c')
+			{
+				print = va_arg(argp, int);
+				putchar(print);
+			}
+		}
+
 	}
-	line = (char *)format;
-	ft_putstr_fd(line, 0);
+
+
+	
 	return (ft_strlen(line));
 }
+
+/*
+if (format[i] == '%')
+		{
+			while (ft_isdigit(format[i]))
+			{
+				min = (temp * 10) + format[i];
+				temp = min;
+				i++;
+			}
+			if (fill_flags(format[i], flags))
+				fill_flags(format[i], flags);//check for flags
+			temp = 0;
+			while (ft_isdigit(format[i]))
+			{
+				min = (temp * 10) + format[i];
+				temp = min;
+				i++;
+			}
+			if (ft_isconv(format[i]))
+			{
+
+			}//stuff */

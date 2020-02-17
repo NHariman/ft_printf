@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/28 15:55:47 by nhariman       #+#    #+#                */
-/*   Updated: 2019/11/27 23:15:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/17 18:23:18 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			ft_atoi(const char *str)
 			negative = -1;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9' && str[i] != '\0')
+	while (ft_isdigit(str[i]) && str[i] != '\0')
 	{
 		number = (number * 10) + (str[i] - '0');
 		i++;
