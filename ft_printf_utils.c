@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/17 22:27:29 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/17 22:46:08 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/21 17:04:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		        ft_isconv(char c)
 			c == 'i' || c == 'u' || c == 'x' || c == 'X' ||
 			c == '%' ? 1 : 0);
 }
+
 
 int	            fill_flags(const char c, t_flag flags)
 {
@@ -32,15 +33,41 @@ int	            fill_flags(const char c, t_flag flags)
 	return (c == '.' || c == '0' || c == '-' || c == '*' ? 1 : 0);
 }
 
-unsigned char   ft_c_con(int i)
+void			ft_print_hex_low(int nb, int *count)
 {
-    unsigned char   c;
-
-    c = (unsigned char)i;
-    return (c);
+	if (nb >= 10 && nb < 16)
+	{
+		ft_putchar_fd(nb + 87, 0);
+		*count = *count + 1;
+	}
+	else if (nb >= 16)
+	{
+		ft_print_hex_low(nb / 16, count);
+		ft_print_hex_low(nb % 16, count);
+	}
+	else
+	{
+		ft_putchar_fd(nb + '0', 0);
+		*count = *count + 1;
+	}
 }
 
-char            *ft_s_con(char *str)
+void			ft_print_hex_up(int nb, int *count)
 {
-    //
+	if (nb >= 10 && nb < 16)
+	{
+		ft_putchar_fd(nb + 55, 0);
+		*count = *count + 1;
+	}
+	else if (nb >= 16)
+	{
+		ft_print_hex_up(nb / 16, count);
+		ft_print_hex_up(nb % 16, count);
+	}
+	else
+	{
+		ft_putchar_fd(nb + '0', 0);
+		*count = *count + 1;
+	}
 }
+
