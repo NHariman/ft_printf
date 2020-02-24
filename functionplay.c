@@ -18,12 +18,14 @@ int     main(void)
     int *pointer;
     int number;
 
-    number = 6;
+    number = -6000;
     pointer = &number;
     printf("printing i for number: %i\n",number);
     printf("printing i for *pointer: %i\n", *pointer);
     printf("print address of number: %x\n", &number);
     printf("print address of pointer: %x\n", pointer);
+    printf("X of number: %X\n", number);
+    printf("made positive and inverted bits: %X\nX of 6000: %X\n", ~(-number + 1), number);
     printf("change value of number though pointer: to 5\n");
     *pointer = 5;
     printf("printing i for *pointer: %i\n", *pointer);

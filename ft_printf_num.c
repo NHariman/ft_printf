@@ -1,39 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_printf_utils.c                                  :+:    :+:            */
+/*   ft_printf_num.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/17 22:27:29 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/21 17:04:39 by nhariman      ########   odam.nl         */
+/*   Created: 2020/02/24 17:31:14 by nhariman       #+#    #+#                */
+/*   Updated: 2020/02/24 17:31:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		        ft_isconv(char c)
+void		ft_print_signed(int n, int *count)
 {
-	return (c == 's' || c == 'c' || c == 'p' || c == 'd' ||
-			c == 'i' || c == 'u' || c == 'x' || c == 'X' ||
-			c == '%' ? 1 : 0);
+	if (n == -2147483648)
+	{
+		ft_putstr_fd("-2147483648", 0);
+		*count = *count + ft_strlen("-2147483648");
+		return ;
+	}
+	if (n < 0)
+	{
+		ft_putchar_fd('-', 0);
+		n = -n;
+		*count = *count + 1;
+	}
+	if (n <= 9)
+	{
+		ft_putchar_fd(n + '0', 0);
+		*count = *count + 1;
+	}
+	else if (n > 9)
+	{
+		ft_print_signed(n / 10, count);
+		ft_print_signed(n % 10, count);
+	}
 }
 
-
-int	            fill_flags(const char c, t_flag flags)
+void		ft_print_unsigned(unsigned int n, int *count)
 {
-	if (c == '0')
-		flags.zero = 1;
-	if (c == '-')
-		flags.negative = 1;
-	if (c == '*')
-		flags.astrix = 1;
-	if (c == '.')
-		flags.period = 1;
-	return (c == '.' || c == '0' || c == '-' || c == '*' ? 1 : 0);
+	if (n <= 9)
+	{
+		ft_putchar_fd(n + '0', 0);
+		*count = *count + 1;
+	}
+	else if (n > 9)
+	{
+		ft_print_unsigned(n / 10, count);
+		ft_print_unsigned(n % 10, count);
+	}
 }
 
-void			ft_print_hex_low(int nb, int *count)
+void			ft_print_hex_low(unsigned int nb, int *count)
 {
 	if (nb >= 10 && nb < 16)
 	{
@@ -52,7 +71,7 @@ void			ft_print_hex_low(int nb, int *count)
 	}
 }
 
-void			ft_print_hex_up(int nb, int *count)
+void			ft_print_hex_up(unsigned int nb, int *count)
 {
 	if (nb >= 10 && nb < 16)
 	{
@@ -70,4 +89,3 @@ void			ft_print_hex_up(int nb, int *count)
 		*count = *count + 1;
 	}
 }
-
