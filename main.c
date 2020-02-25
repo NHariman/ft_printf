@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 15:14:24 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/24 14:03:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/24 20:31:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main(void)
 
     lol = -5000;
     lmao = "123456789";
-    test = "test case %% %c %skhfdh\nd: %d\ni: %i\nu: %u\nx: %x\nX: %X\n";
+    test = "test case %% %c %skhfdh\nd: %d\ni: %i\nu: %u\nx: %x\nX: %X\np: %p\n";
     c = 'c';
     string = "testing if main string can be given as argument. %i, %%, %s\n";
     printf(string, lol, lmao); //first argument can be given as a string (obv.)
@@ -36,8 +36,8 @@ int main(void)
     result = printf("testcase save to int variable result %i\n",2147483646);
     printf("%i\n", result);
     printf("TESTING MY OWN PRINTF FROM HERE\n");
-    result = ft_printf(test, c, lmao, lol, lol, lol, lol, lol);
-    other = printf(test, c, lmao, lol, lol, lol, lol, lol);
+    result = ft_printf(test, c, lmao, lol, lol, lol, lol, lol, *test);
+    other = printf(test, c, lmao, lol, lol, lol, lol, lol, *test);
     printf("result of ft_printf: %i\n", result);
     printf("result of printf:    %i\n", other);
     return (0);
