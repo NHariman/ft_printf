@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:14 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/24 20:18:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/26 14:42:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,14 @@ void		ft_print_unsigned(unsigned int n, int *count)
 	}
 }
 
-void		ft_printptr(unsigned long n, int *count)
+void		ft_printptr(unsigned long n, size_t start, int *count)
 {
+	if (start == 0)
+	{
+		ft_putstr_fd("0x", 0);
+		*count = *count + ft_strlen("0x");
+		start = 1;
+	}
 	if (n >= 10 && n < 16)
 	{
 		ft_putchar_fd(n + 87, 0);
@@ -61,8 +67,8 @@ void		ft_printptr(unsigned long n, int *count)
 	}
 	else if (n >= 16)
 	{
-		ft_printptr(n / 16, count);
-		ft_printptr(n % 16, count);
+		ft_printptr(n / 16, start, count);
+		ft_printptr(n % 16, start, count);
 	}
 	else
 	{

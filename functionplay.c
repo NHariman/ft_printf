@@ -32,7 +32,7 @@ int     main(void)
     printf("make a function that changes value of pointer to add one\n");
     value_change(pointer);
     printf("printing i for *pointer: %i\n", *pointer);
-    printf("print p: %p\n", *pointer);
+    printf("print p: %065p stff\n", *pointer);
     
     return (0);
 }

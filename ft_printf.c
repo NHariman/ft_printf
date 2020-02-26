@@ -6,23 +6,20 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/25 18:21:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/26 18:00:11 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int				fill_flags(const char c, t_flag flags)
+t_flag				ft_flags(const char *format, int *i, t_flag flags)
 {
-	if (c == '0')
+	while ()
+	if (format[*i] == '0')
 		flags.zero = 1;
-	if (c == '-')
+	if (format[*i] == '-')
 		flags.negative = 1;
-	if (c == '*')
-		flags.astrix = 1;
-	if (c == '.')
-		flags.period = 1;
-	return (c == '.' || c == '0' || c == '-' || c == '*' ? 1 : 0);
+	return (flags);
 }
 
 void			ft_format(char c, va_list argp, int *count)
@@ -33,9 +30,7 @@ void			ft_format(char c, va_list argp, int *count)
 		ft_printchar(va_arg(argp, int), count);
 	if (c == 'p')
 	{
-		ft_putstr_fd("0x", 0);
-		*count = *count + ft_strlen("0x");
-		ft_printptr((unsigned long)va_arg(argp, void *), count);
+		ft_printptr((unsigned long)va_arg(argp, void *), 0, count);
 	}
 	if (c == 's')
 		ft_printstr(va_arg(argp, char *), count);
@@ -71,7 +66,7 @@ int				ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			ft_flag();
+	//		ft_flag();
 	//		do_flag
 	//		do_wideeeboi
 	//		do_preciseboi
