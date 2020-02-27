@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 16:47:58 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/26 17:59:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/27 19:42:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void			ft_format(char c, va_list argp, int *count);
 t_flag			ft_flags(const char *format, int *i, t_flag flags);
 int				ft_printf(const char *format, ...);
 void			ft_diuxx(const char c, int arg, int *count);
-void			ft_print_hex_low(unsigned int nb, int *count);
-void			ft_print_hex_up(unsigned int nb, int *count);
+void			ft_print_hex(const char c, unsigned int nb, int *count);
 void			ft_print_unsigned(unsigned int n, int *count);
 void			ft_print_signed(int n, int *count);
 void			ft_printstr(char *str, int *count);

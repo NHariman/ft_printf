@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:14 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/26 14:42:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/27 19:32:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void		ft_printptr(unsigned long n, size_t start, int *count)
 	}
 }
 
-void			ft_print_hex_low(unsigned int nb, int *count)
+void			ft_print_hex(const char c, unsigned int nb, int *count)
 {
 	if (nb >= 10 && nb < 16)
 	{
-		ft_putchar_fd(nb + 87, 0);
+		c == 'X' ? ft_putchar_fd(nb + 55, 0) : ft_putchar_fd(nb + 87, 0);
 		*count = *count + 1;
 	}
 	else if (nb >= 16)

@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/26 18:00:11 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/27 19:41:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 t_flag				ft_flags(const char *format, int *i, t_flag flags)
 {
-	while ()
-	if (format[*i] == '0')
-		flags.zero = 1;
-	if (format[*i] == '-')
-		flags.negative = 1;
+	while (ft_strchr("0-", format[*i]))
+	{
+		if (format[*i] == '0')
+			flags.zero = 1;
+		if (format[*i] == '-')
+			flags.negative = 1;
+		*i = *i + 1;
+	}
 	return (flags);
 }
 
@@ -44,10 +47,8 @@ void			ft_diuxx(const char c, int arg, int *count)
 		ft_print_signed(arg, count);
 	if (c == 'u')
 		ft_print_unsigned((unsigned int)arg, count);
-	if (c == 'x')
-		ft_print_hex_low((unsigned int)arg, count);
-	if (c == 'X')
-		ft_print_hex_up((unsigned int)arg, count);
+	if (ft_strchr("xX", c))
+		ft_print_hex(c, (unsigned int)arg, count);
 }
 
 int				ft_printf(const char *format, ...)
@@ -66,10 +67,10 @@ int				ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-	//		ft_flag();
+	//		ft_flag(format, &i, flags);
 	//		do_flag
-	//		do_wideeeboi
-	//		do_preciseboi
+	//		do_wideeeboi(); //if no flags, pad at front
+	//		do_preciseboi()
 			ft_format(format[i], argp, ptr);
 		}
 		else
