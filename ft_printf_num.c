@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:14 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/27 19:32:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/02/27 19:45:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void			ft_print_hex(const char c, unsigned int nb, int *count)
 	}
 	else if (nb >= 16)
 	{
-		ft_print_hex_low(nb / 16, count);
-		ft_print_hex_low(nb % 16, count);
+		ft_print_hex(c, nb / 16, count);
+		ft_print_hex(c, nb % 16, count);
 	}
 	else
 	{
@@ -95,7 +95,7 @@ void			ft_print_hex(const char c, unsigned int nb, int *count)
 		*count = *count + 1;
 	}
 }
-
+ /*
 void			ft_print_hex_up(unsigned int nb, int *count)
 {
 	if (nb >= 10 && nb < 16)
@@ -113,4 +113,4 @@ void			ft_print_hex_up(unsigned int nb, int *count)
 		ft_putchar_fd(nb + '0', 0);
 		*count = *count + 1;
 	}
-}
+} */
