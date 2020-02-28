@@ -20,6 +20,7 @@ int     main(void)
 
     number = -6000;
     pointer = &number;
+    int lol = -5;
     printf("printing i for number: %i\n",number);
     printf("printing i for *pointer: %i\n", *pointer);
     printf("print address of number: %x\n", &number);
@@ -32,7 +33,7 @@ int     main(void)
     printf("make a function that changes value of pointer to add one\n");
     value_change(pointer);
     printf("printing i for *pointer: %i\n", *pointer);
-    printf("print p: %065p stff\n", *pointer);
+    printf("print number %%06i: %06i stff\n", lol);
     
     return (0);
 }
