@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/02 20:04:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/02 23:23:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void			ft_reset_flags(t_flag *flags)
 {
 	flags->dash = 0;
 	flags->zero = 0;
-	flags->pre = 0;
-	flags->pad = 0;
+	flags->pre = -1;
+	flags->pad = -1;
 }
 
 int					ft_printf(const char *format, ...)
