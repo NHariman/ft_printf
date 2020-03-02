@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 18:22:16 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/02 19:54:33 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/02 22:53:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void				ft_pad(int n, int *count)
 		return ;
 	while (i < n)
 	{
-		write(0, " ", 1);
+		write(1, " ", 1);
 		i++;
 	}
 	*count = *count + n;
@@ -95,7 +95,7 @@ void				ft_padzero(int n, int *count)
 		return ;
 	while (i < n)
 	{
-		write(0, "0", 1);
+		write(1, "0", 1);
 		i++;
 	}
 	*count = *count + n;

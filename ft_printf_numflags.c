@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/02 19:32:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/02 22:54:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void				ft_signed(int n, int *count, t_flag *flags)
 		ft_pad(flags->pad - ft_numlen(n), count);
 	if (n < 0)
 	{
-		ft_putchar_fd('-', 0);
+		ft_putchar_fd('-', 1);
 		n = -n;
 		*count = *count + 1;
 	}

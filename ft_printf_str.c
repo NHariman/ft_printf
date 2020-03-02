@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:04 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/02 20:19:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/02 22:53:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_print_char(char c, int *count, t_flag *flags)
 {
 	if (!flags->dash && c != '%')
 		ft_pad(flags->pad - 1, count);
-	ft_putchar_fd(c, 0);
+	ft_putchar_fd(c, 1);
 	*count = *count + 1;
 	if (flags->dash && c != '%')
 		ft_pad(flags->pad - 1, count);
@@ -36,7 +36,7 @@ void		ft_print_str(char *str, int *count, t_flag *flags)
 		ft_pad(flags->pad - strlen, count);
 	while (i < strlen)
 	{
-		write(0, &str[i], 1);
+		write(1, &str[i], 1);
 		i++;
 	}
 	*count = *count + strlen;
