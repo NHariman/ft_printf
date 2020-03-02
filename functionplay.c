@@ -35,6 +35,5 @@ int     main(void)
     printf("printing i for *pointer: %i\n", *pointer);
     printf("print number %%06i: %06i stff\n", lol);
     printf("print string %%s but with precision and padding: %10.5s", "hereklhadlfkhdflahfjkhs\n");
-    write(0, '0', 5);
     return (0);
 }
