@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 16:47:58 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/28 19:55:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/02 19:29:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,48 @@ typedef struct	s_flag
 {
 	size_t		dash;
 	size_t		zero;
-	size_t		pre;
-	size_t		pad;
+	int			pre;
+	int			pad;
 }				t_flag;
-void			ft_format(char c, va_list argp, int *count, t_flag *flags);
+/*
+** the first layer, checks for flags, width, precision (-0.)
+** ends with a format check (ft_format) and sends them there
+ */
 void			ft_flags(const char *format, int *i, t_flag *flags);
-void			ft_width(const char *format, int *i, t_flag *flags);
-void			ft_precision(const char *format, int *i, t_flag *flag);
-void			ft_diuxx(const char c, int arg, int *count, t_flag *flags);
+void			ft_width(const char *format, int *i,
+							va_list argp, t_flag *flags);
+void			ft_precision(const char *format, int *i,
+							va_list argp, t_flag *flag);
+//void			ft_format(char c, va_list argp, int *count, t_flag *flags); // might be removable
+/*
+** second layer, comes from ft_format, which checks for pdiuxX%
+** the following functions are called upon depending on which
+** conversion is used.
+** these functions call the padding and precision functions if 
+** needed and then call the function that is actually responsible
+** for printing the values correctly
+ */
+void			ft_hex(char c, unsigned int n, int *count, t_flag *flags);
+void			ft_ptr(unsigned long ptr, int *count, t_flag *flags);
+void			ft_signed(int n, int *count, t_flag *flags);
+void			ft_unsigned(unsigned int n, int *count, t_flag *flags);
+/*
+** these functions handle the padding AND 
+** printing strings or characters. Unlike number functions
+** which need an extra function to do so as shown above.
+ */
+void			ft_print_char(char c, int *count, t_flag *flags);
+void			ft_print_str(char *str, int *count, t_flag *flags);
+/*
+** these functions handle the printing of values or strings
+ */
 void			ft_print_hex(const char c, unsigned int nb, int *count);
-void			ft_print_unsigned(unsigned int n, int *count);
+void			ft_print_ptr(unsigned long n, int *count);
 void			ft_print_signed(int n, int *count);
-void			ft_printstr(char *str, int *count, t_flag *flags);
-void			ft_printchar(char c, int *count, t_flag *flags);
-void			ft_printptr(unsigned long n,
-					size_t start,
-					int *count);
+void			ft_print_unsigned(unsigned int n, int *count);
+/*
+** these functions handle the 0 padding or ' ' padding if needed
+ */
+void			ft_pad(int n, int *count);
+void			ft_padzero(int n, int *count);
 #endif

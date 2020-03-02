@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 18:22:16 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/28 20:14:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/02 19:54:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,77 @@ void				ft_flags(const char *format, int *i, t_flag *flags)
 	}
 }
 
-void				ft_width(const char *format, int *i, t_flag *flags)
+void				ft_width(const char *format, int *i,
+								va_list argp, t_flag *flags)
 {
-	flags->pad = 0;
-	while (ft_isdigit(format[*i]) && format[*i] != '\0')
+	flags->pad = -1;
+	if (format[*i] == '*')
 	{
-		flags->pad = (flags->pad * 10) + (format[*i] - '0');
+		flags->pad = va_arg(argp, int);
 		*i = *i + 1;
-	}
-}
-
-void				ft_precision(const char *format, int *i, t_flag *flags)
-{
-	flags->pre = 0;
-	while (ft_isdigit(format[*i]) && format[*i] != '\0')
-	{
-		flags->pre = (flags->pre * 10) + (format[*i] - '0');
-		*i = *i + 1;
-	}
-}
-
-void				ft_padzero(int n, int *count)
-{
-	if (n < 0)
 		return ;
-	write(0, '0', n);
-	*count = *count + n;
+	}
+	else
+	{
+		flags->pad = 0;
+		while (ft_isdigit(format[*i]) && format[*i] != '\0')
+		{
+			flags->pad = (flags->pad * 10) + (format[*i] - '0');
+			*i = *i + 1;
+		}
+	}
+}
+
+void				ft_precision(const char *format, int *i,
+									va_list argp, t_flag *flags)
+{
+	flags->pre = -1;
+	if (format[*i] != '.')
+		return ;
+	*i = *i + 1;
+	if (format[*i] == '*')
+	{
+		flags->pre = va_arg(argp, int);
+		*i = *i + 1;
+		return ;
+	}
+	else
+	{
+		flags->pre = 0;
+		while (ft_isdigit(format[*i]) && format[*i] != '\0')
+		{
+			flags->pre = (flags->pre * 10) + (format[*i] - '0');
+			*i = *i + 1;
+		}
+	}
 }
 
 void				ft_pad(int n, int *count)
 {
-	if (n < 0)
+	int		i;
+
+	i = 0;
+	if (n <= 0)
 		return ;
-	write(0, ' ', n);
+	while (i < n)
+	{
+		write(0, " ", 1);
+		i++;
+	}
+	*count = *count + n;
+}
+
+void				ft_padzero(int n, int *count)
+{
+	int		i;
+
+	i = 0;
+	if (n <= 0)
+		return ;
+	while (i < n)
+	{
+		write(0, "0", 1);
+		i++;
+	}
 	*count = *count + n;
 }

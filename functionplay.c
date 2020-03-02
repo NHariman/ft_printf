@@ -23,8 +23,8 @@ int     main(void)
     int lol = -5;
     printf("printing i for number: %i\n",number);
     printf("printing i for *pointer: %i\n", *pointer);
-    printf("print address of number: %x\n", &number);
-    printf("print address of pointer: %x\n", pointer);
+   // printf("print address of number: %x\n", &number);
+   // printf("print address of pointer: %x\n", pointer);
     printf("X of number: %X\n", number);
     printf("made positive and inverted bits: %X\nX of 6000: %X\n", ~(-number + 1), number);
     printf("change value of number though pointer: to 5\n");
@@ -34,6 +34,7 @@ int     main(void)
     value_change(pointer);
     printf("printing i for *pointer: %i\n", *pointer);
     printf("print number %%06i: %06i stff\n", lol);
-    
+    printf("print string %%s but with precision and padding: %10.5s", "hereklhadlfkhdflahfjkhs\n");
+    write(0, '0', 5);
     return (0);
 }

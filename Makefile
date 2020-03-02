@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman       #+#    #+#                 #
-#    Updated: 2020/02/13 16:45:07 by nhariman      ########   odam.nl          #
+#    Updated: 2020/03/02 19:27:22 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,12 @@ CLIBFT = 	libft/ft_atoi.c \
 			libft/ft_itoa.c \
 			libft/ft_strmapi.c
 
-CPRINTF = ft_printf.c
+CPRINTF =	ft_printf.c \
+			ft_printf_flags.c \
+			ft_printf_hexflags.c \
+			ft_printf_numflags.c \
+			ft_printf_num.c \
+			ft_printf_str.c
 
 CLIBFTBONUS = 	libft/ft_lstnew_bonus.c \
 				libft/ft_lstadd_front_bonus.c \
@@ -74,7 +79,7 @@ all: $(NAME)
 $(NAME): $(OLIBFT) $(OPRINTF)
 	ar rcs $@ $^
 
-%.o: %.c libft/libft.h libftprintf.h
+%.o: %.c libft/libft.h libftprintf.h ft_printf.h
 	$(COMPILE) -c $(FLAGS) -o $@ $<
 
 clean:

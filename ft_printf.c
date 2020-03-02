@@ -6,37 +6,40 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/28 20:11:18 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/02 20:04:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include "ft_printf.h"
 
-void			ft_format(char c, va_list argp, int *count, t_flag *flags)
+static void			ft_format(char c, va_list argp, int *count, t_flag *flags)
 {
 	if (c == '%')
-		ft_printchar(c, count, flags);
+		ft_print_char(c, count, flags);
 	if (c == 'c')
-		ft_printchar(va_arg(argp, int), count, flags);
+		ft_print_char(va_arg(argp, int), count, flags);
 	if (c == 'p')
-		ft_printptr((unsigned long)va_arg(argp, void *), 0, count);
+		ft_ptr((unsigned long)va_arg(argp, void *), count, flags);
 	if (c == 's')
-		ft_printstr(va_arg(argp, char *), count, flags);
-	if (ft_strchr("diuxX", c))
-		ft_diuxx(c, va_arg(argp, int), count, flags);
-}
-
-void			ft_diuxx(const char c, int arg, int *count, t_flag *flags)
-{
+		ft_print_str(va_arg(argp, char *), count, flags);
 	if (ft_strchr("di", c))
-		ft_print_signed(arg, count);
+		ft_signed(va_arg(argp, int), count, flags);
 	if (c == 'u')
-		ft_unsigned((unsigned int)arg, count, flags);
+		ft_unsigned((unsigned int)va_arg(argp, int), count, flags);
 	if (ft_strchr("xX", c))
-		ft_print_hex(c, (unsigned int)arg, count);
+		ft_hex(c, (unsigned int)va_arg(argp, int), count, flags);
 }
 
-int				ft_printf(const char *format, ...)
+static void			ft_reset_flags(t_flag *flags)
+{
+	flags->dash = 0;
+	flags->zero = 0;
+	flags->pre = 0;
+	flags->pad = 0;
+}
+
+int					ft_printf(const char *format, ...)
 {
 	va_list		argp;
 	int			i;
@@ -52,12 +55,13 @@ int				ft_printf(const char *format, ...)
 		{
 			i++;
 			ft_flags(format, &i, &flags);
-			ft_width(format, &i, &flags);
-			ft_precision(format, &i, &flags);
+			ft_width(format, &i, argp, &flags);
+			ft_precision(format, &i, argp, &flags);
 			ft_format(format[i], argp, &count, &flags);
+			ft_reset_flags(&flags);
 		}
 		else
-			ft_printchar(format[i], &count, &flags);
+			ft_print_char(format[i], &count, &flags);
 		i++;
 	}
 	va_end(argp);
