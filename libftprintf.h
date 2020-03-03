@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 16:47:58 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/02 19:29:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/03 15:19:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,21 @@ void			ft_precision(const char *format, int *i,
 ** needed and then call the function that is actually responsible
 ** for printing the values correctly
  */
-void			ft_hex(char c, unsigned int n, int *count, t_flag *flags);
-void			ft_ptr(unsigned long ptr, int *count, t_flag *flags);
-void			ft_signed(int n, int *count, t_flag *flags);
-void			ft_unsigned(unsigned int n, int *count, t_flag *flags);
+void			ft_hex(char c, unsigned long n, int *count, t_flag *flags);
+void			ft_signed(long n, int *count, t_flag *flags);
+void			ft_unsigned(unsigned long n, int *count, t_flag *flags);
 /*
 ** these functions handle the padding AND 
-** printing strings or characters. Unlike number functions
+** printing of strings or characters. Unlike number functions
 ** which need an extra function to do so as shown above.
  */
 void			ft_print_char(char c, int *count, t_flag *flags);
 void			ft_print_str(char *str, int *count, t_flag *flags);
 /*
-** these functions handle the printing of values or strings
+** these functions handle the printing of numeric values
  */
-void			ft_print_hex(const char c, unsigned int nb, int *count);
-void			ft_print_ptr(unsigned long n, int *count);
-void			ft_print_signed(int n, int *count);
-void			ft_print_unsigned(unsigned int n, int *count);
+void			ft_print_hex(const char c, unsigned long nb, int *count);
+void			ft_print_decimal(unsigned long n, int *count);
 /*
 ** these functions handle the 0 padding or ' ' padding if needed
  */

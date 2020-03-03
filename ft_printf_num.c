@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:14 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/02 22:53:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/03 14:33:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void			ft_print_hex(const char c, unsigned int nb, int *count)
+void			ft_print_hex(const char c, unsigned long nb, int *count)
 {
 	if (nb >= 10 && nb < 16)
 	{
@@ -31,26 +31,7 @@ void			ft_print_hex(const char c, unsigned int nb, int *count)
 	}
 }
 
-void			ft_print_ptr(unsigned long n, int *count)
-{
-	if (n >= 10 && n < 16)
-	{
-		ft_putchar_fd(n + 87, 1);
-		*count = *count + 1;
-	}
-	else if (n >= 16)
-	{
-		ft_print_ptr(n / 16, count);
-		ft_print_ptr(n % 16, count);
-	}
-	else
-	{
-		ft_putchar_fd(n + '0', 0);
-		*count = *count + 1;
-	}
-}
-
-void			ft_print_signed(int n, int *count)
+void			ft_print_decimal(unsigned long n, int *count)
 {
 	if (n <= 9)
 	{
@@ -59,21 +40,7 @@ void			ft_print_signed(int n, int *count)
 	}
 	else if (n > 9)
 	{
-		ft_print_signed(n / 10, count);
-		ft_print_signed(n % 10, count);
-	}
-}
-
-void			ft_print_unsigned(unsigned int n, int *count)
-{
-	if (n <= 9)
-	{
-		ft_putchar_fd(n + '0', 1);
-		*count = *count + 1;
-	}
-	else if (n > 9)
-	{
-		ft_print_unsigned(n / 10, count);
-		ft_print_unsigned(n % 10, count);
+		ft_print_decimal(n / 10, count);
+		ft_print_decimal(n % 10, count);
 	}
 }
