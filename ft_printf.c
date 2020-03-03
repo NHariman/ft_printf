@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/02 23:23:03 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/03 13:17:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int					ft_printf(const char *format, ...)
 	count = 0;
 	while (format[i] != '\0')
 	{
+		ft_reset_flags(&flags);
 		if (format[i] == '%')
 		{
 			i++;
@@ -58,7 +59,6 @@ int					ft_printf(const char *format, ...)
 			ft_width(format, &i, argp, &flags);
 			ft_precision(format, &i, argp, &flags);
 			ft_format(format[i], argp, &count, &flags);
-			ft_reset_flags(&flags);
 		}
 		else
 			ft_print_char(format[i], &count, &flags);
