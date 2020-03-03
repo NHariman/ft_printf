@@ -6,17 +6,22 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/03 20:53:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/03 21:08:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static size_t		ft_numlen(long n)
+static long		ft_numlen(long n)
 {
-	size_t		len;
+	long		len;
 
 	len = 1;
+	if (n < 0)
+	{
+		len++;
+		n = -n;
+	}
 	while (n > 9)
 	{
 		n = n / 10;
@@ -40,7 +45,7 @@ void				ft_signed(long n, int *count, t_flag *flags)
 	if (flags->pre)
 		ft_padzero(flags->pre - ft_numlen(n), count);
 	ft_print_decimal(n, count);
-	if (!flags->dash)
+	if (flags->dash)
 		ft_pad(flags->pad - ft_numlen(n), count);
 }
 
