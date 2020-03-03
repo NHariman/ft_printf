@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:04 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/03 12:52:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/03 20:08:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,25 @@ void		ft_print_char(char c, int *count, t_flag *flags)
 		ft_pad(flags->pad - 1, count);
 }
 
+/*
+** undefined behaviour if not a literal string is given, but (null) is printed because
+** that's what the real printf does.
+** https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/printfFunction.html
+*/
 void		ft_print_str(char *str, int *count, t_flag *flags)
 {
 	size_t		strlen;
 	size_t		i;
 
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		*count = *count + ft_strlen("(null)");
+		return ;
+	}
 	strlen = ft_strlen(str);
 	i = 0;
-	if (flags->pre && (size_t)flags->pre < strlen)
+	if ((size_t)flags->pre < strlen)
 		strlen = flags->pre;
 	if (!flags->dash)
 		ft_pad(flags->pad - strlen, count);
