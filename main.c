@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 15:14:24 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/03 20:45:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/03 21:00:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,12 @@ int main(void)
     //eleventh case
     printf("printing digits with precisions .15:\n");
     format = "%%c: %c\n%%s: %s\n%%: %%\n%%i: %.15i\n%%d: %.15d\n%%u: %.15u\n%%x: %.15x\n%%X: %.15X\n%%p: %p\n\n";
+    ft_printf_result = ft_printf(format, 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
+    printf_result = printf(format, 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //twelveth case
+    printf("printing digits with width 15:\n");
+    format = "%%c: %c\n%%s: %s\n%%: %%\n%%i: %15i\n%%d: %15d\n%%u: %15u\n%%x: %15x\n%%X: %15X\n%%p: %p\n\n";
     ft_printf_result = ft_printf(format, 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
     printf_result = printf(format, 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
     printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
