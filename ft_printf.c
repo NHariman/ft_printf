@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/03 15:21:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/04 15:44:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void			ft_format(char c, va_list argp, int *count, t_flag *flags)
 		ft_unsigned((unsigned int)va_arg(argp, int), count, flags);
 	if (ft_strchr("xX", c))
 		ft_hex(c, (unsigned int)va_arg(argp, int), count, flags);
+	return ;
 }
 
 static void			ft_reset_flags(t_flag *flags)
@@ -57,6 +58,8 @@ int					ft_printf(const char *format, ...)
 			i++;
 			ft_flags(format, &i, &flags);
 			ft_width(format, &i, argp, &flags);
+			if (format[i] == '\0')
+				break ;
 			ft_precision(format, &i, argp, &flags);
 			ft_format(format[i], argp, &count, &flags);
 		}

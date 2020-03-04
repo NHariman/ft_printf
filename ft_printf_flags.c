@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 18:22:16 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/03 15:40:10 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/04 18:52:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,34 +65,4 @@ void				ft_precision(const char *format, int *i,
 			*i = *i + 1;
 		}
 	}
-}
-
-void				ft_pad(int n, int *count)
-{
-	int		i;
-
-	i = 0;
-	if (n <= 0)
-		return ;
-	while (i < n)
-	{
-		write(1, " ", 1);
-		i++;
-	}
-	*count = *count + n;
-}
-
-void				ft_padzero(int n, int *count)
-{
-	int		i;
-
-	i = 0;
-	if (n <= 0)
-		return ;
-	while (i < n)
-	{
-		write(1, "0", 1);
-		i++;
-	}
-	*count = *count + n;
 }

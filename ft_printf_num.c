@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:14 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/03 14:33:08 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/04 15:17:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,34 @@ void			ft_print_decimal(unsigned long n, int *count)
 		ft_print_decimal(n / 10, count);
 		ft_print_decimal(n % 10, count);
 	}
+}
+
+void				ft_pad(int n, int *count)
+{
+	int		i;
+
+	i = 0;
+	if (n < 0)
+		return ;
+	while (i < n)
+	{
+		write(1, " ", 1);
+		i++;
+	}
+	*count = *count + n;
+}
+
+void				ft_padzero(int n, int *count)
+{
+	int		i;
+
+	i = 0;
+	if (n < 0)
+		return ;
+	while (i < n)
+	{
+		write(1, "0", 1);
+		i++;
+	}
+	*count = *count + n;
 }
