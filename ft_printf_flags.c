@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 18:22:16 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/04 18:52:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/04 21:00:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void				ft_precision(const char *format, int *i,
 {
 	if (format[*i] != '.')
 		return ;
+	flags->dot = 1;
 	*i = *i + 1;
 	if (format[*i] == '*')
 	{

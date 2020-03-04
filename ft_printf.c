@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/04 15:44:57 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/04 21:09:37 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 static void			ft_format(char c, va_list argp, int *count, t_flag *flags)
 {
+	if (c == '\0')
+		return ;
 	if (c == '%')
 		ft_print_char(c, count, flags);
 	if (c == 'c')
@@ -29,27 +31,23 @@ static void			ft_format(char c, va_list argp, int *count, t_flag *flags)
 		ft_unsigned((unsigned int)va_arg(argp, int), count, flags);
 	if (ft_strchr("xX", c))
 		ft_hex(c, (unsigned int)va_arg(argp, int), count, flags);
-	return ;
 }
 
 static void			ft_reset_flags(t_flag *flags)
 {
 	flags->dash = 0;
 	flags->zero = 0;
+	flags->dot = 0;
 	flags->pre = -1;
 	flags->pad = -1;
 }
 
-int					ft_printf(const char *format, ...)
+void				ft_vprintf(const char *format, va_list argp, int *count)
 {
-	va_list		argp;
 	int			i;
-	int			count;
 	t_flag		flags;
 
-	va_start(argp, format);
 	i = 0;
-	count = 0;
 	while (format[i] != '\0')
 	{
 		ft_reset_flags(&flags);
@@ -58,15 +56,25 @@ int					ft_printf(const char *format, ...)
 			i++;
 			ft_flags(format, &i, &flags);
 			ft_width(format, &i, argp, &flags);
-			if (format[i] == '\0')
-				break ;
 			ft_precision(format, &i, argp, &flags);
-			ft_format(format[i], argp, &count, &flags);
+			ft_format(format[i], argp, count, &flags);
+			if (format[i] == '\0')
+				return ;
 		}
 		else
-			ft_print_char(format[i], &count, &flags);
+			ft_print_char(format[i], count, &flags);
 		i++;
 	}
+}
+
+int					ft_printf(const char *format, ...)
+{
+	va_list		argp;
+	int			count;
+
+	count = 0;
+	va_start(argp, format);
+	ft_vprintf(format, argp, &count);
 	va_end(argp);
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 15:14:24 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/03 21:00:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/04 19:51:14 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,21 @@ int main(void)
     format = "%%c: %c\n%%s: %s\n%%: %%\n%%i: %15i\n%%d: %15d\n%%u: %15u\n%%x: %15x\n%%X: %15X\n%%p: %p\n\n";
     ft_printf_result = ft_printf(format, 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
     printf_result = printf(format, 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    // new case
+    ft_printf_result = ft_printf("%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c\n",' ','!','"','#','$','%','&','\'','(',')','*','+',',','-','.','/','0','1','2','3','4','5','6','7','8','9',':',';','<','=','>','?','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','[','\\',']','^','_','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','{','|','}','~','');
+    printf_result = printf("%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c\n",' ','!','"','#','$','%','&','\'','(',')','*','+',',','-','.','/','0','1','2','3','4','5','6','7','8','9',':',';','<','=','>','?','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','[','\\',']','^','_','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','{','|','}','~','');
+     printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //new case
+    printf("printing digits with width 15:\n");
+    format = "test %*s test\n";
+    ft_printf_result = ft_printf(format, -1, "abc");
+    printf_result = printf(format, -1, "abc");
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //new case
+    printf("printing:\n");
+    ft_printf_result = ft_printf("%08i\n", 34);
+    printf_result = printf("%08i\n", 34);
     printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
     return (0);
 

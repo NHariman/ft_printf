@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 16:47:58 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/03 15:19:57 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/04 21:06:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ typedef struct	s_flag
 {
 	size_t		dash;
 	size_t		zero;
-	int			pre;
+	size_t		dot;
 	int			pad;
+	int			pre;
 }				t_flag;
+void				ft_vprintf(const char *format, va_list argp, int *count);
 /*
 ** the first layer, checks for flags, width, precision (-0.)
 ** ends with a format check (ft_format) and sends them there
