@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 18:38:45 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/04 13:20:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/04 21:31:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void				ft_hex(char c, unsigned long n, int *count, t_flag *flags)
 		ft_putstr_fd("0x", 1);
 		*count = *count + ft_strlen("0x");
 	}
-	if (!flags->dash)
+	if (!flags->dash && c != 'p')
 		ft_pad(flags->pad - ft_hexlen(n), count);
 	if (flags->zero && !flags->dash)
 		ft_padzero(flags->pad - ft_hexlen(n), count);
