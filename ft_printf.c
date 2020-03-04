@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/04 21:09:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/04 21:37:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void			ft_format(char c, va_list argp, int *count, t_flag *flags)
 	if (c == 'c')
 		ft_print_char(va_arg(argp, int), count, flags);
 	if (c == 'p')
-		ft_hex(c, (unsigned long)va_arg(argp, void *), count, flags);
+		ft_ptr((unsigned long)va_arg(argp, void *), count, flags);
 	if (c == 's')
 		ft_print_str(va_arg(argp, char *), count, flags);
 	if (ft_strchr("di", c))
