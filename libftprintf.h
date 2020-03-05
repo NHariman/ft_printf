@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 16:47:58 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/04 21:06:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/04 21:36:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void			ft_width(const char *format, int *i,
 							va_list argp, t_flag *flags);
 void			ft_precision(const char *format, int *i,
 							va_list argp, t_flag *flag);
-//void			ft_format(char c, va_list argp, int *count, t_flag *flags); // might be removable
 /*
 ** second layer, comes from ft_format, which checks for pdiuxX%
 ** the following functions are called upon depending on which
@@ -44,6 +43,7 @@ void			ft_precision(const char *format, int *i,
 ** for printing the values correctly
  */
 void			ft_hex(char c, unsigned long n, int *count, t_flag *flags);
+void			ft_ptr(unsigned long n, int *count, t_flag *flags);
 void			ft_signed(long n, int *count, t_flag *flags);
 void			ft_unsigned(unsigned long n, int *count, t_flag *flags);
 /*

@@ -6,13 +6,14 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/04 21:19:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/05 17:06:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+//#include <stdio.h>
 
-static long		ft_numlen(long n)
+static long			ft_numlen(long n)
 {
 	long		len;
 
@@ -30,14 +31,37 @@ static long		ft_numlen(long n)
 	return (len);
 }
 
+static void			ft_padlen(long n, long *padlen, t_flag *flags)
+{
+	if (flags->dot && flags->pre <= 0)
+		*padlen = flags->pad;
+	else if (flags->dot && n < 0)
+	{
+		if (flags->pre < ft_numlen(-n))
+			*padlen = flags->pad - ft_numlen(n);
+		else
+			*padlen = flags->pad - ft_numlen(n) - (flags->pre - ft_numlen(-n));
+	}
+	else if (flags->dot && n >= 0)
+	{
+		if (flags->pre < ft_numlen(n))
+			*padlen = flags->pad - ft_numlen(n);
+		else
+			*padlen = flags->pad - ft_numlen(n) - (flags->pre - ft_numlen(n));
+	}
+	else
+		*padlen = flags->pad - ft_numlen(n);
+//	printf("\nprinting padlen: %li\n", *padlen);
+}
+
 void				ft_signed(long n, int *count, t_flag *flags)
 {
 	long	onbr;
 	long	padlen;
 
 	onbr = n;
-	padlen = flags->pre < 0 ? flags->pad - ft_numlen(onbr) :
-				flags->pad - ft_numlen(onbr) - (flags->pre - ft_numlen(onbr));
+	padlen = 0;
+	ft_padlen(n, &padlen, flags);
 	if ((!flags->dash && !flags->zero) ||
 			(!flags->dash && flags->zero && flags->pre > 0))
 		ft_pad(padlen, count);
@@ -54,7 +78,12 @@ void				ft_signed(long n, int *count, t_flag *flags)
 	if (flags->pre != 0)
 		ft_print_decimal(n, count);
 	if (flags->dash || flags->pad < -1)
-		ft_pad(onbr < 0 ? padlen - 1 : padlen, count);
+	{
+		if (flags->pad > -1)
+			ft_pad(padlen, count);
+		else
+			ft_pad(-flags->pad - ft_numlen(n), count);
+	}
 }
 
 void				ft_unsigned(unsigned long n, int *count, t_flag *flags)
