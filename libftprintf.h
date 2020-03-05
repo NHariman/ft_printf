@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 16:47:58 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/04 21:36:26 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/05 22:18:11 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ typedef struct	s_flag
 	int			pad;
 	int			pre;
 }				t_flag;
+typedef struct	s_dashpad
+{
+	long		onbr;
+	long		padlen;
+}				t_dashpad;
+
 void				ft_vprintf(const char *format, va_list argp, int *count);
 /*
 ** the first layer, checks for flags, width, precision (-0.)

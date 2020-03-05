@@ -6,12 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/05 17:06:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/05 22:17:56 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-//#include <stdio.h>
 
 static long			ft_numlen(long n)
 {
@@ -51,10 +50,46 @@ static void			ft_padlen(long n, long *padlen, t_flag *flags)
 	}
 	else
 		*padlen = flags->pad - ft_numlen(n);
-//	printf("\nprinting padlen: %li\n", *padlen);
+}
+
+static void			ft_dashpad(t_dashpad *dashpad, t_flag *flags,
+								long n, int *count)
+{
+	if (dashpad->onbr < 0)
+		ft_pad(flags->pad > -1 ?
+				dashpad->padlen : -flags->pad - ft_numlen(-n), count);
+	else
+		ft_pad(flags->pad > -1 ?
+				dashpad->padlen : -flags->pad - ft_numlen(n), count);
 }
 
 void				ft_signed(long n, int *count, t_flag *flags)
+{
+	t_dashpad dashpad;
+
+	dashpad.onbr = n;
+	dashpad.padlen = 0;
+	ft_padlen(n, &dashpad.padlen, flags);
+	if ((!flags->dash && !flags->zero) ||
+			(!flags->dash && flags->zero && flags->pre > 0))
+		ft_pad(dashpad.padlen, count);
+	if (n < 0)
+	{
+		ft_putchar_fd('-', 1);
+		n = -n;
+		*count = *count + 1;
+	}
+	if (flags->zero && !flags->dash && flags->pre < 0)
+		ft_padzero(dashpad.padlen, count);
+	if (flags->dot)
+		ft_padzero(flags->pre - ft_numlen(n), count);
+	if (flags->pre != 0)
+		ft_print_decimal(n, count);
+	if (flags->dash || flags->pad < -1)
+		ft_dashpad(&dashpad, flags, n, count);
+}
+
+void				ft_unsigned(unsigned long n, int *count, t_flag *flags)
 {
 	long	onbr;
 	long	padlen;
@@ -65,37 +100,13 @@ void				ft_signed(long n, int *count, t_flag *flags)
 	if ((!flags->dash && !flags->zero) ||
 			(!flags->dash && flags->zero && flags->pre > 0))
 		ft_pad(padlen, count);
-	if (n < 0)
-	{
-		ft_putchar_fd('-', 1);
-		n = -n;
-		*count = *count + 1;
-	}
 	if (flags->zero && !flags->dash && flags->pre < 0)
 		ft_padzero(padlen, count);
-	if (flags->pre)
-		ft_padzero(flags->pre - ft_numlen(n), count);
-	if (flags->pre != 0)
-		ft_print_decimal(n, count);
-	if (flags->dash || flags->pad < -1)
-	{
-		if (flags->pad > -1)
-			ft_pad(padlen, count);
-		else
-			ft_pad(-flags->pad - ft_numlen(n), count);
-	}
-}
-
-void				ft_unsigned(unsigned long n, int *count, t_flag *flags)
-{
-	if (!flags->dash)
-		ft_pad(flags->pad - ft_numlen(n), count);
-	if (flags->zero && !flags->dash)
-		ft_padzero(flags->pad - ft_numlen(n), count);
-	if (flags->pre)
+	if (flags->dot)
 		ft_padzero(flags->pre - ft_numlen(n), count);
 	if (flags->pre != 0)
 		ft_print_decimal((unsigned long)n, count);
-	if (flags->dash)
-		ft_pad(flags->pad - ft_numlen(n), count);
+	if (flags->dash || flags->pad < -1)
+		ft_pad(flags->pad > -1 ?
+					padlen : -flags->pad - ft_numlen(n), count);
 }

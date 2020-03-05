@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman       #+#    #+#                 #
-#    Updated: 2020/03/02 19:27:22 by nhariman      ########   odam.nl          #
+#    Updated: 2020/03/05 22:20:20 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ clean:
 	$(RM) $(OLIBFT) $(OLIBFTBONUS) $(OPRINTF)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) libft.a
 
 re: fclean all
 

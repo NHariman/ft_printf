@@ -6,15 +6,15 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 18:38:45 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/04 21:40:57 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/05 21:48:11 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static size_t		ft_hexlen(long n)
+static long		ft_hexlen(long n)
 {
-	size_t		len;
+	long		len;
 
 	len = 1;
 	while (n >= 16)
@@ -25,30 +25,66 @@ static size_t		ft_hexlen(long n)
 	return (len);
 }
 
+static void			ft_hexpadlen(unsigned long n, long *padlen, t_flag *flags)
+{
+	if (flags->dot && flags->pre <= 0)
+		*padlen = flags->pad;
+	else if (flags->dot && n < 0)
+	{
+		if (flags->pre < ft_hexlen(-n))
+			*padlen = flags->pad - ft_hexlen(n);
+		else
+			*padlen = flags->pad - ft_hexlen(n) - (flags->pre - ft_hexlen(-n));
+	}
+	else if (flags->dot && n >= 0)
+	{
+		if (flags->pre < ft_hexlen(n))
+			*padlen = flags->pad - ft_hexlen(n);
+		else
+			*padlen = flags->pad - ft_hexlen(n) - (flags->pre - ft_hexlen(n));
+	}
+	else
+		*padlen = flags->pad - ft_hexlen(n);
+}
+
 void				ft_hex(char c, unsigned long n, int *count, t_flag *flags)
 {
-	if (!flags->dash)
-		ft_pad(flags->pad - ft_hexlen(n), count);
-	if (flags->zero && !flags->dash)
-		ft_padzero(flags->pad - ft_hexlen(n), count);
-	if (flags->pre)
+	long	padlen;
+
+	padlen = 0;
+	ft_hexpadlen(n, &padlen, flags);
+	if ((!flags->dash && !flags->zero) ||
+			(!flags->dash && flags->zero && flags->pre > 0))
+		ft_pad(padlen, count);
+	if (flags->zero && !flags->dash && flags->pre < 0)
+		ft_padzero(padlen, count);
+	if (flags->dot)
 		ft_padzero(flags->pre - ft_hexlen(n), count);
-	ft_print_hex(c, (unsigned long)n, count);
-	if (flags->dash)
-		ft_pad(flags->pad - ft_hexlen(n), count);
+	if (flags->pre != 0)
+		ft_print_hex(c, (unsigned long)n, count);
+	if (flags->dash || flags->pad < -1)
+		ft_pad(flags->pad > -1 ?
+					padlen : -flags->pad - ft_hexlen(n), count);
 }
 
 void				ft_ptr(unsigned long n, int *count, t_flag *flags)
 {
+	long	padlen;
+
+	padlen = 0;
+	ft_hexpadlen(n, &padlen, flags);
+	if ((!flags->dash && !flags->zero) ||
+			(!flags->dash && flags->zero && flags->pre > 0))
+		ft_pad(padlen - 2, count);
+	if (flags->zero && !flags->dash && flags->pre < 0)
+		ft_padzero(padlen, count);
 	ft_putstr_fd("0x", 1);
 	*count = *count + ft_strlen("0x");
-	if (!flags->dash)
-		ft_pad(flags->pad - ft_hexlen(n) - 2, count);
-	if (flags->zero && !flags->dash)
-		ft_padzero(flags->pad - ft_hexlen(n) - 2, count);
-	if (flags->pre)
-		ft_padzero(flags->pre - ft_hexlen(n) - 2, count);
-	ft_print_hex('p', (unsigned long)n, count);
-	if (flags->dash)
-		ft_pad(flags->pad - ft_hexlen(n) - 2, count);
+	if (flags->dot)
+		ft_padzero(flags->pre - ft_hexlen(n), count);
+	if (flags->pre != 0)
+		ft_print_hex('p', (unsigned long)n, count);
+	if (flags->dash || flags->pad < -1)
+		ft_pad(flags->pad > -1 ?
+					padlen - 2 : -flags->pad - ft_hexlen(n) - 2, count);
 }

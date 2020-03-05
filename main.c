@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 15:14:24 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/05 16:49:14 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/05 20:51:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ int main(void)
     printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
     // new
     printf("printing:\n");
-    ft_printf_result = ft_printf("%5.i\n", 0);
-    printf_result = printf("%5.i\n", 0);
+    ft_printf_result = ft_printf("%0*i\n", -7, -54);
+    printf_result = printf("%0*i\n", -7, -54);
     printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
     // new
  //   printf("printing:\n");
