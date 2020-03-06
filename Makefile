@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman       #+#    #+#                 #
-#    Updated: 2020/03/06 19:49:02 by nhariman      ########   odam.nl          #
+#    Updated: 2020/03/06 19:56:15 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ NAME = libftprintf.a
 
 LIBFT = libft.a
 
-LIBFTDIR = ./libft
+LIBFTDIR = ./libft/
 
 all: $(LIBFT) $(NAME)
 
@@ -82,18 +82,18 @@ $(LIBFT):
 	make -s -C $(LIBFTDIR) bonus
 
 $(NAME): $(OLIBFT) $(OPRINTF)
-	ar rcs $@ $^ 
+	ar rcs $@ $^
 
 %.o: %.c libftprintf.h ft_printf.h
-	$(COMPILE) -c $(FLAGS) -o $@ $<
+	$(COMPILE) $(FLAGS) -o $@ -c $<
 
 clean:
 	$(RM) $(OPRINTF)
-	make clean -s -C libft
+	make -s -C libft clean
 
 fclean: clean
 	$(RM) $(NAME)
-	make fclean -s -C libft
+	make -s -C libft fclean
 
 re: fclean all
 
