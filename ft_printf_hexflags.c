@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 18:38:45 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/05 21:48:11 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/06 15:20:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static long		ft_hexlen(long n)
+static long			ft_hexlen(long n)
 {
 	long		len;
 
@@ -62,6 +62,8 @@ void				ft_hex(char c, unsigned long n, int *count, t_flag *flags)
 		ft_padzero(flags->pre - ft_hexlen(n), count);
 	if (flags->pre != 0)
 		ft_print_hex(c, (unsigned long)n, count);
+	if (*count < 0)
+		return ;
 	if (flags->dash || flags->pad < -1)
 		ft_pad(flags->pad > -1 ?
 					padlen : -flags->pad - ft_hexlen(n), count);
@@ -78,12 +80,16 @@ void				ft_ptr(unsigned long n, int *count, t_flag *flags)
 		ft_pad(padlen - 2, count);
 	if (flags->zero && !flags->dash && flags->pre < 0)
 		ft_padzero(padlen, count);
-	ft_putstr_fd("0x", 1);
+	pft_putstr_fd("0x", 1, count);
+	if (*count < 0)
+		return ;
 	*count = *count + ft_strlen("0x");
 	if (flags->dot)
 		ft_padzero(flags->pre - ft_hexlen(n), count);
 	if (flags->pre != 0)
 		ft_print_hex('p', (unsigned long)n, count);
+	if (*count < 0)
+		return ;
 	if (flags->dash || flags->pad < -1)
 		ft_pad(flags->pad > -1 ?
 					padlen - 2 : -flags->pad - ft_hexlen(n) - 2, count);

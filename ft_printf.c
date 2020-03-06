@@ -6,14 +6,15 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/04 21:37:06 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/06 15:15:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "ft_printf.h"
 
-static void			ft_format(char c, va_list argp, int *count, t_flag *flags)
+static void			ft_format(const char c, va_list argp,
+								int *count, t_flag *flags)
 {
 	if (c == '\0')
 		return ;
@@ -63,6 +64,8 @@ void				ft_vprintf(const char *format, va_list argp, int *count)
 		}
 		else
 			ft_print_char(format[i], count, &flags);
+		if (*count < 0)
+			return ;
 		i++;
 	}
 }

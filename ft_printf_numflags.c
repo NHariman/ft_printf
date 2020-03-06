@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/05 22:17:56 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/06 15:57:31 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static long			ft_numlen(long n)
 {
-	long		len;
+	long	len;
 
 	len = 1;
 	if (n < 0)
@@ -75,9 +75,10 @@ void				ft_signed(long n, int *count, t_flag *flags)
 		ft_pad(dashpad.padlen, count);
 	if (n < 0)
 	{
-		ft_putchar_fd('-', 1);
+		pft_putchar_fd('-', 1, count);
 		n = -n;
-		*count = *count + 1;
+		if (*count >= 0)
+			*count = *count + 1;
 	}
 	if (flags->zero && !flags->dash && flags->pre < 0)
 		ft_padzero(dashpad.padlen, count);
@@ -85,6 +86,8 @@ void				ft_signed(long n, int *count, t_flag *flags)
 		ft_padzero(flags->pre - ft_numlen(n), count);
 	if (flags->pre != 0)
 		ft_print_decimal(n, count);
+	if (*count < 0)
+		return ;
 	if (flags->dash || flags->pad < -1)
 		ft_dashpad(&dashpad, flags, n, count);
 }
@@ -96,6 +99,8 @@ void				ft_unsigned(unsigned long n, int *count, t_flag *flags)
 
 	onbr = n;
 	padlen = 0;
+	if (*count < 0)
+		return ;
 	ft_padlen(n, &padlen, flags);
 	if ((!flags->dash && !flags->zero) ||
 			(!flags->dash && flags->zero && flags->pre > 0))
@@ -106,6 +111,8 @@ void				ft_unsigned(unsigned long n, int *count, t_flag *flags)
 		ft_padzero(flags->pre - ft_numlen(n), count);
 	if (flags->pre != 0)
 		ft_print_decimal((unsigned long)n, count);
+	if (*count < 0)
+		return ;
 	if (flags->dash || flags->pad < -1)
 		ft_pad(flags->pad > -1 ?
 					padlen : -flags->pad - ft_numlen(n), count);

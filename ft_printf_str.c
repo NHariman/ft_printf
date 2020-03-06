@@ -6,32 +6,63 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:04 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/04 18:59:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/06 15:49:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include <stdio.h>
 
-void		ft_print_char(char c, int *count, t_flag *flags)
+void		pft_putchar_fd(char c, int fd, int *count)
+{
+	ssize_t output;
+
+	output = 0;
+	if (*count < 0)
+		return ;
+	output = write(fd, &c, 1);
+	if (output < 0)
+		*count = -1;
+}
+
+void		pft_putstr_fd(char *s, int fd, int *count)
+{
+	int		length;
+	ssize_t	output;
+
+	output = 0;
+	if (*count < 0)
+		return ;
+	if (s)
+	{
+		length = ft_strlen(s);
+		output = write(fd, s, length);
+		if (output < 0)
+			*count = -1;
+	}
+}
+
+void		ft_print_char(const char c, int *count, t_flag *flags)
 {
 	if (!flags->dash && !flags->zero)
 		ft_pad(flags->pad - 1, count);
 	if (flags->zero && !flags->dash)
 		ft_padzero(flags->pad - 1, count);
-	ft_putchar_fd(c, 1);
+	pft_putchar_fd(c, 1, count);
+	if (*count < 0)
+		return ;
 	*count = *count + 1;
 	if (flags->dash)
 		ft_pad(flags->pad - 1, count);
 }
 
 /*
-** undefined behaviour if not a literal string is given, but (null) is printed because
+** undefined behaviour if not a literal string is given,
+** but (null) is printed because
 ** that's what the real printf does.
-** https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/printfFunction.html
 */
 
-void		ft_print_str(char *str, int *count, t_flag *flags)
+void		ft_print_str(const char *str, int *count, t_flag *flags)
 {
 	size_t		i;
 	size_t		strlen;
@@ -47,7 +78,9 @@ void		ft_print_str(char *str, int *count, t_flag *flags)
 		ft_padzero(flags->pad - strlen, count);
 	while (i < strlen)
 	{
-		write(1, &str[i], 1);
+		pft_putchar_fd(str[i], 1, count);
+		if (*count < 0)
+			return ;
 		i++;
 	}
 	*count = *count + strlen;

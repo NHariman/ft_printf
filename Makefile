@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman       #+#    #+#                 #
-#    Updated: 2020/03/05 22:20:20 by nhariman      ########   odam.nl          #
+#    Updated: 2020/03/06 18:07:35 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,42 +56,34 @@ CPRINTF =	ft_printf.c \
 			ft_printf_num.c \
 			ft_printf_str.c
 
-CLIBFTBONUS = 	libft/ft_lstnew_bonus.c \
-				libft/ft_lstadd_front_bonus.c \
-				libft/ft_lstsize_bonus.c \
-				libft/ft_lstlast_bonus.c \
-				libft/ft_lstadd_back_bonus.c \
-				libft/ft_lstdelone_bonus.c \
-				libft/ft_lstiter_bonus.c \
-				libft/ft_lstclear_bonus.c \
-				libft/ft_lstmap_bonus.c
-
 OLIBFT = $(CLIBFT:.c=.o)
 
 OPRINTF = $(CPRINTF:.c=.o)
 
-OLIBFTBONUS = $(CLIBFTBONUS:.c=.o)
-
 NAME = libftprintf.a
 
-all: $(NAME)
+LIBFT = libft.a
+
+all: $(LIBFT) $(NAME)
+
+$(LIBFT):
+	make -s -C libft
 
 $(NAME): $(OLIBFT) $(OPRINTF)
 	ar rcs $@ $^
 
-%.o: %.c libft/libft.h libftprintf.h ft_printf.h
+%.o: %.c libftprintf.h ft_printf.h
 	$(COMPILE) -c $(FLAGS) -o $@ $<
 
 clean:
-	$(RM) $(OLIBFT) $(OLIBFTBONUS) $(OPRINTF)
+	$(RM) $(OPRINTF)
+	make clean -s -C libft
 
 fclean: clean
-	$(RM) $(NAME) libft.a
+	$(RM) $(NAME)
+	make fclean -s -C libft
 
 re: fclean all
 
 lldb: fclean
 	$(COMPILE) -g $(CLIBFT) $(CPRINTF) -I./
-
-bonus: $(OLIBFT) $(OLIBFTBONUS) $(OPRINTF)
-	ar rcs $(NAME) $^
