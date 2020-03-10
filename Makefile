@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman       #+#    #+#                 #
-#    Updated: 2020/03/06 19:56:15 by nhariman      ########   odam.nl          #
+#    Updated: 2020/03/10 23:52:31 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ LIBFTDIR = ./libft/
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	make -s -C $(LIBFTDIR) bonus
+	make -C $(LIBFTDIR) bonus
 
 $(NAME): $(OLIBFT) $(OPRINTF)
 	ar rcs $@ $^

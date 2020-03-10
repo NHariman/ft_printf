@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 18:22:16 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/06 14:13:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/10 23:32:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void					ft_flags(const char *format, int *i, t_flag *flags)
 {
-	while (ft_strchr("0-", format[*i]))
+	while (ft_strchr("0- ", format[*i]))
 	{
 		if (format[*i] == '0')
 			flags->zero = 1;
@@ -30,6 +30,11 @@ void					ft_width(const char *format, int *i,
 	if (format[*i] == '*')
 	{
 		flags->pad = va_arg(argp, int);
+		if (flags->pad < 0)
+		{
+			flags->pad *= -1;
+			flags->dash = 1;
+		}
 		*i = *i + 1;
 		return ;
 	}
@@ -60,6 +65,8 @@ void					ft_precision(const char *format, int *i,
 	else
 	{
 		flags->pre = 0;
+		if (!ft_isdigit(format[*i]))
+			return ;
 		while (ft_isdigit(format[*i]) && format[*i] != '\0')
 		{
 			flags->pre = (flags->pre * 10) + (format[*i] - '0');

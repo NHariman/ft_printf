@@ -1,33 +1,117 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   testmain.c                                         :+:    :+:            */
+/*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/11 17:51:11 by nhariman       #+#    #+#                */
-/*   Updated: 2020/02/20 23:25:50 by nhariman      ########   odam.nl         */
+/*   Created: 2020/02/12 15:14:24 by nhariman       #+#    #+#                */
+/*   Updated: 2020/03/09 20:01:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "ft_printf.h"
 
-int	main(void)
+int main(void)
 {
-	int	lol;
-	char *lmao;
-	int	result;
+    int ft_printf_result;
+    int printf_result;
+    char *format;
 
-	lol = 1127;
-	lmao = "123456789";
-	printf("print a string (s):\n%.*s\n", 3, "help"); // . indicates percision, * indicates that the 3 is the percision, it is given as an argument. s is string
-	printf("print a string with percision minimum of 1 character, maximum of 4: %1.4s\nfrom original string: %s\n", lmao, lmao);
-	printf("print a string with percision minimum of 1 character, maximum of 11: %1.11s\nfrom original string: %s\n", lmao, lmao);
-	printf("%% 100%% 100\n"); // prints a % and nothing else. ONLY works this way, one % will result in no % printed. if only one % is present and stuff is written behind it(and not a newline), it creates a segmentation error.
-	printf("%c and %c\n", 'c', 99); //prints character c once as character other time as int ascii decimal value converted to character
-	printf("d flag (signed decimal): %d\ni flag (signed decimal): %i\nu flag (unsigned decimal): %u\n u flag with bits flipped: %u\nx flag (lowercase hexadecimal): %x\nX flag (uppercase hexadecimal): %X\n", ~lol, lol, lol, lol, lol, lol);
-	printf("NOW WITH FLAGS:\nd flag (signed decimal): %d\ni flag (signed decimal): %i\nu flag (unsigned decimal): %u\nx flag (lowercase hexadecimal): %x\nX flag (uppercase hexadecimal): %X\n", lol, lol, lol, lol, lol);	 // now with flags the .5 indicates at least 5 digits must be printed, if less digits are available, 0 padding is provided in this case, the precision gives the MINIMUM amount of numbers that must be provided.
-	result = printf("\n");
-	printf("%i\n", result);
-	return (0);
+    printf("From hereon out, ft_printf will be used and compared with the original printf:\n");
+    // first case
+    ft_printf_result = ft_printf("ft_printf test, no arguments\n");
+    printf_result = printf("ft_printf test, no arguments\n");
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    ft_printf("two i values:\n");
+    ft_printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    // second case
+    printf("printing a string:\n");
+    ft_printf_result = ft_printf("string: %s\n", "hello world");
+    printf_result = printf("string: %s\n", "hello world");
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //third case
+    ft_printf("printing %% diuxX and p:\n");
+    ft_printf_result = ft_printf("%%c: %c\n%%s: %s\n%%: %%\n%%i: %i\n%%d: %d\n%%u: %u\n%%x: %x\n%%X: %X\n%%p: %p\n", 'c', "Hello world!", 100, 100, 3000, 4000, 4000, &ft_printf_result);
+    printf_result = printf("%%c: %c\n%%s: %s\n%%: %%\n%%i: %i\n%%d: %d\n%%u: %u\n%%x: %x\n%%X: %X\n%%p: %p\n", 'c', "Hello world!", 100, 100, 3000, 4000, 4000, &ft_printf_result);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //fourth case
+    printf("printing %% diuxX and p with negative values:\n");
+    ft_printf_result = ft_printf("%%c: %c\n%%s: %s\n%%: %%\n%%i: %i\n%%d: %d\n%%u: %u\n%%x: %x\n%%X: %X\n%%p: %p\n", 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
+    printf_result = printf("%%c: %c\n%%s: %s\n%%: %%\n%%i: %i\n%%d: %d\n%%u: %u\n%%x: %x\n%%X: %X\n%%p: %p\n", 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //fifth case
+    printf("printing an empty string:\n");
+    ft_printf_result = ft_printf("string: %s\n", "");
+    printf_result = printf("string: %s\n", "");
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //sixth case
+    printf("printing a string with precision .5:\n");
+    ft_printf_result = ft_printf("string: %.5s\n", "hello world!");
+    printf_result = printf("string: %.5s\n", "hello world!");
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+     //seventh case
+    printf("printing a string with precision .0:\n");
+    ft_printf_result = ft_printf("string: %.0s\n", "hello world!");
+    printf_result = printf("string: %.0s\n", "hello world!");
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //eigth case, undefined behaviour
+    printf("printing a nonexistent string:\n");
+    printf_result = printf("string: %s\n", NULL);
+    ft_printf_result = ft_printf("string: %s\n", NULL);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //nineth case
+    printf("printing a string with a width and dash:\n");
+    printf_result = printf("string width 10: %10s test\n string width 10 with -: %-10s test\n", "hello world", "hello world");
+    ft_printf_result = ft_printf("string width 10: %10s test\n string width 10 with -: %-10s test\n", "hello world", "hello world");
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //tenth case
+    printf("printing a string with a width and dash, where * is given for width:\n");
+    printf_result = printf("string width 10: %10s test\n string width 10 with -: %-*s test\n", "hello world", 10, "hello world");
+    ft_printf_result = ft_printf("string width 10: %10s test\n string width 10 with -: %-*s test\n", "hello world", 10, "hello world");
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //eleventh case
+    printf("printing digits with precisions .15:\n");
+    format = "%%c: %c\n%%s: %s\n%%: %%\n%%i: %.15i\n%%d: %.15d\n%%u: %.15u\n%%x: %.15x\n%%X: %.15X\n%%p: %p\n\n";
+    ft_printf_result = ft_printf(format, 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
+    printf_result = printf(format, 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //twelveth case
+    printf("printing digits with width 15:\n");
+    format = "%%c: %c\n%%s: %s\n%%: %%\n%%i: %15i\n%%d: %15d\n%%u: %15u\n%%x: %15x\n%%X: %15X\n%%p: %p\n\n";
+    ft_printf_result = ft_printf(format, 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
+    printf_result = printf(format, 'c', "Hello world!", -100, -100, -3000, -4000, -4000, &ft_printf_result);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    // new case
+    ft_printf_result = ft_printf("%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c\n",' ','!','"','#','$','%','&','\'','(',')','*','+',',','-','.','/','0','1','2','3','4','5','6','7','8','9',':',';','<','=','>','?','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','[','\\',']','^','_','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','{','|','}','~','');
+    printf_result = printf("%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c%1c%2c%3c%4c\n",' ','!','"','#','$','%','&','\'','(',')','*','+',',','-','.','/','0','1','2','3','4','5','6','7','8','9',':',';','<','=','>','?','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','[','\\',']','^','_','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','{','|','}','~','');
+     printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //new case
+    printf("printing digits with width 15:\n");
+    format = "test %*s test\n";
+    ft_printf_result = ft_printf(format, -1, "abc");
+    printf_result = printf(format, -1, "abc");
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //new case
+    printf("printing:\n");
+    ft_printf_result = ft_printf("%08i\n", 34);
+    printf_result = printf("%08i\n", 34);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    //new
+    printf("printing:\n");
+    ft_printf_result = ft_printf("%7i\n", -14);
+    printf_result = printf("%7i\n", -14);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    // new
+    printf("printing:\n");
+    ft_printf_result = ft_printf("[%0*i]\n", -7, -54);
+    printf_result = printf("[%0*i]\n", -7, -54);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    // new, ft_printf fails this one
+    printf("printing:\n");
+    ft_printf_result = ft_printf("[%-5.*i]\n", -5, 5);
+    printf_result = printf("[%-5.*i]\n", -5, 5);
+    printf("result ft_printf: %i\nresult printf: %i\n\n", ft_printf_result, printf_result);
+    return (0);
 }

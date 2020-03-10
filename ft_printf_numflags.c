@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/06 15:57:31 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/10 23:08:30 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ static long			ft_numlen(long n)
 
 static void			ft_padlen(long n, long *padlen, t_flag *flags)
 {
-	if (flags->dot && flags->pre <= 0)
+	if (flags->dot && flags->pre < 0)
+		flags->pre = 0;
+	if (flags->dot && flags->pre == 0 && n == 0)
 		*padlen = flags->pad;
 	else if (flags->dot && n < 0)
 	{
@@ -52,17 +54,6 @@ static void			ft_padlen(long n, long *padlen, t_flag *flags)
 		*padlen = flags->pad - ft_numlen(n);
 }
 
-static void			ft_dashpad(t_dashpad *dashpad, t_flag *flags,
-								long n, int *count)
-{
-	if (dashpad->onbr < 0)
-		ft_pad(flags->pad > -1 ?
-				dashpad->padlen : -flags->pad - ft_numlen(-n), count);
-	else
-		ft_pad(flags->pad > -1 ?
-				dashpad->padlen : -flags->pad - ft_numlen(n), count);
-}
-
 void				ft_signed(long n, int *count, t_flag *flags)
 {
 	t_dashpad dashpad;
@@ -71,7 +62,7 @@ void				ft_signed(long n, int *count, t_flag *flags)
 	dashpad.padlen = 0;
 	ft_padlen(n, &dashpad.padlen, flags);
 	if ((!flags->dash && !flags->zero) ||
-			(!flags->dash && flags->zero && flags->pre > 0))
+			(!flags->dash && flags->zero && flags->pre >= 0))
 		ft_pad(dashpad.padlen, count);
 	if (n < 0)
 	{
@@ -84,12 +75,12 @@ void				ft_signed(long n, int *count, t_flag *flags)
 		ft_padzero(dashpad.padlen, count);
 	if (flags->dot)
 		ft_padzero(flags->pre - ft_numlen(n), count);
-	if (flags->pre != 0)
+	if (flags->pre != 0 || (flags->pre == 0 && n != 0))
 		ft_print_decimal(n, count);
 	if (*count < 0)
 		return ;
 	if (flags->dash || flags->pad < -1)
-		ft_dashpad(&dashpad, flags, n, count);
+		ft_pad(dashpad.padlen, count);
 }
 
 void				ft_unsigned(unsigned long n, int *count, t_flag *flags)
@@ -103,17 +94,16 @@ void				ft_unsigned(unsigned long n, int *count, t_flag *flags)
 		return ;
 	ft_padlen(n, &padlen, flags);
 	if ((!flags->dash && !flags->zero) ||
-			(!flags->dash && flags->zero && flags->pre > 0))
+			(!flags->dash && flags->zero && flags->pre >= 0))
 		ft_pad(padlen, count);
 	if (flags->zero && !flags->dash && flags->pre < 0)
 		ft_padzero(padlen, count);
 	if (flags->dot)
 		ft_padzero(flags->pre - ft_numlen(n), count);
-	if (flags->pre != 0)
+	if (flags->pre != 0 || (flags->pre == 0 && n != 0))
 		ft_print_decimal((unsigned long)n, count);
 	if (*count < 0)
 		return ;
 	if (flags->dash || flags->pad < -1)
-		ft_pad(flags->pad > -1 ?
-					padlen : -flags->pad - ft_numlen(n), count);
+		ft_pad(padlen, count);
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 18:38:45 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/06 15:20:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/10 23:08:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,18 @@ void				ft_hex(char c, unsigned long n, int *count, t_flag *flags)
 	padlen = 0;
 	ft_hexpadlen(n, &padlen, flags);
 	if ((!flags->dash && !flags->zero) ||
-			(!flags->dash && flags->zero && flags->pre > 0))
+			(!flags->dash && flags->zero && flags->pre >= 0))
 		ft_pad(padlen, count);
 	if (flags->zero && !flags->dash && flags->pre < 0)
 		ft_padzero(padlen, count);
 	if (flags->dot)
 		ft_padzero(flags->pre - ft_hexlen(n), count);
-	if (flags->pre != 0)
+	if (flags->pre != 0 || (flags->pre == 0 && n != 0))
 		ft_print_hex(c, (unsigned long)n, count);
 	if (*count < 0)
 		return ;
 	if (flags->dash || flags->pad < -1)
-		ft_pad(flags->pad > -1 ?
-					padlen : -flags->pad - ft_hexlen(n), count);
+		ft_pad(padlen, count);
 }
 
 void				ft_ptr(unsigned long n, int *count, t_flag *flags)
@@ -76,7 +75,7 @@ void				ft_ptr(unsigned long n, int *count, t_flag *flags)
 	padlen = 0;
 	ft_hexpadlen(n, &padlen, flags);
 	if ((!flags->dash && !flags->zero) ||
-			(!flags->dash && flags->zero && flags->pre > 0))
+			(!flags->dash && flags->zero && flags->pre >= 0))
 		ft_pad(padlen - 2, count);
 	if (flags->zero && !flags->dash && flags->pre < 0)
 		ft_padzero(padlen, count);
@@ -86,11 +85,10 @@ void				ft_ptr(unsigned long n, int *count, t_flag *flags)
 	*count = *count + ft_strlen("0x");
 	if (flags->dot)
 		ft_padzero(flags->pre - ft_hexlen(n), count);
-	if (flags->pre != 0)
+	if (flags->pre != 0 || (flags->pre == 0 && n != 0))
 		ft_print_hex('p', (unsigned long)n, count);
 	if (*count < 0)
 		return ;
-	if (flags->dash || flags->pad < -1)
-		ft_pad(flags->pad > -1 ?
-					padlen - 2 : -flags->pad - ft_hexlen(n) - 2, count);
+	if (flags->dash)
+		ft_pad(padlen - 2, count);
 }
