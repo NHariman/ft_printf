@@ -1,0 +1,33 @@
+function numbur
+{
+	if (not dass flag)
+		print pading
+	print prefix
+	if (zero flag)
+		print zeros
+	if (precise)
+		print zeros
+	print numbur
+	if (dass flag)
+		print pading
+}
+
+function strong
+{
+	if (not dass flag)
+		print pading
+	if (precise < stronglan)
+		stronglan = precise
+	wrote strong with lan stronglan
+	if (dass flag)
+		print pading
+}
+
+function choracter
+{
+	if (not dass flag)
+		print pading
+	wrote choracter
+	if (dass flag)
+		print pading
+}

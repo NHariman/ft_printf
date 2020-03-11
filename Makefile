@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman       #+#    #+#                 #
-#    Updated: 2020/03/10 23:52:31 by nhariman      ########   odam.nl          #
+#    Updated: 2020/03/11 13:54:41 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,16 +49,6 @@ CLIBFT = 	libft/ft_atoi.c \
 			libft/ft_itoa.c \
 			libft/ft_strmapi.c
 
-CLIBFTBONUS = 	libft/ft_lstnew_bonus.c \
-				libft/ft_lstadd_front_bonus.c \
-				libft/ft_lstsize_bonus.c \
-				libft/ft_lstlast_bonus.c \
-				libft/ft_lstadd_back_bonus.c \
-				libft/ft_lstdelone_bonus.c \
-				libft/ft_lstiter_bonus.c \
-				libft/ft_lstclear_bonus.c \
-				libft/ft_lstmap_bonus.c
-
 CPRINTF =	ft_printf.c \
 			ft_printf_flags.c \
 			ft_printf_hexflags.c \
@@ -79,7 +69,7 @@ LIBFTDIR = ./libft/
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	make -C $(LIBFTDIR) bonus
+	make -C $(LIBFTDIR)
 
 $(NAME): $(OLIBFT) $(OPRINTF)
 	ar rcs $@ $^
