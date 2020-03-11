@@ -5,6 +5,7 @@
 void    oops_another_function(int *pointer)
 {
     *pointer = *pointer + 5;
+    (*pointer)++
 }
 
 void    value_change(int *pointer)

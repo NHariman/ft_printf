@@ -6,7 +6,7 @@
 /*   By: dkrecisz <dkrecisz@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 17:26:42 by dkrecisz       #+#    #+#                */
-/*   Updated: 2020/03/10 17:42:14 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/11 14:29:05 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,8 +292,8 @@ int     main(void)
 
 
 	printf("%s---- TEST 39 ----%s\n", KRED, KNRM);
-    printf("[%d]\n", printf("REAL [%4.10.4d]", 42));
-	printf("[%d]\n", ft_printf("MINE [%4.10.4d]", 42));
+    printf("undefined behaviour: [%d]\n", printf("REAL [%4.10.4d]", 42));
+	printf("undefined behaviour: [%d]\n", ft_printf("MINE [%4.10.4d]", 42));
 	printf("\n");
 	if (c == 'y' || c == 'Y')
 		sleep(1);
@@ -313,8 +313,8 @@ int     main(void)
 		sleep(1);
 
 	printf("%s---- TEST 41 ----%s\n", KRED, KNRM);
-    printf("[%d]\n", printf("REAL [% ]"));
-	printf("[%d]\n", ft_printf("MINE [% ]"));
+    printf("[%d]\n", printf("undefined behaviour: REAL [% ]"));
+	printf("[%d]\n", ft_printf("undefined behaviour: MINE [% ]"));
 	printf("\n");
 	if (c == 'y' || c == 'Y')
 		sleep(1);

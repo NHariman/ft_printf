@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 16:47:58 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/10 23:42:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/11 15:24:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct	s_flag
 	int			pad;
 	int			pre;
 }				t_flag;
+
 typedef struct	s_dashpad
 {
 	long		onbr;

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 15:11:28 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/11 13:30:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/11 15:15:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,10 +243,10 @@ int		main(void)
 	printf(" -5.*d: %i\n\n", printf("[%-5.*d]\n", -5, 5));
 	//
 	printf(" 05.*d: %i\n", ft_printf("[%05.*d]\n", -5, 5));
-	printf(" 05.*d: %i\n\n", printf("[%5.*d]\n", -5, 5));
+	printf(" 05.*d: %i\n\n", printf("[%05.*d]\n", -5, 5));
 	//
 	printf(" 0-5.*d: %i\n", ft_printf("[%0-5.*d]\n", -5, 5));
-	printf(" 0-5.*d: %i\n\n", printf("[%5.*d]\n", -5, 5));
+	printf(" 0-5.*d: %i\n\n", printf("[%0-5.*d]\n", -5, 5));
 	//
 	printf(" -05.*d: %i\n", ft_printf("[%-05.*d]\n", -5, 5));
 	printf(" -05.*d: %i\n\n", printf("[%-05.*d]\n", -5, 5));

@@ -6,12 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:04 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/06 15:49:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/11 17:00:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
 void		pft_putchar_fd(char c, int fd, int *count)
 {
@@ -84,9 +83,6 @@ void		ft_print_str(const char *str, int *count, t_flag *flags)
 		i++;
 	}
 	*count = *count + strlen;
-	if (flags->dash || flags->pad < -1)
-	{
-		flags->pad = flags->pad < -1 ? -flags->pad : flags->pad;
+	if (flags->dash)
 		ft_pad(flags->pad - strlen, count);
-	}
 }

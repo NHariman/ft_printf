@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 15:52:44 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/11 13:46:14 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/11 15:21:28 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 int		main(void)
 {
+	/* 
 	printf(" *.*i: %i\n", ft_printf("[%*.*i]\n", -5, -5, 5));
 	printf(" *.*i: %i\n\n", printf("[%*.*i]\n", -5, -5, 5));
 	printf(" i: %i\n", ft_printf("[%i]\n", 5));
@@ -38,13 +39,23 @@ int		main(void)
 	printf(" .5i: %i\n\n", printf("[%.5i]\n", 5));
 	printf(" .*i: %i\n", ft_printf("[%.*i]\n", -5, 5));
 	printf(" .*i: %i\n\n", printf("[%.*i]\n", -5, 5));
-	printf("the following two tests are undefined behaviour!")
+	printf("the following two tests are undefined behaviour!");
 	printf(" .*i: %i\n", ft_printf("[%.+5i]\n", -5));
 	printf(" .*i: %i\n\n", printf("[%.+5i]\n", -5));
 	printf(" .*i: %i\n", ft_printf("[%.-5i]\n", -5)); // error with gcc+
-	printf(" .*i: %i\n\n", printf("[%.-5i]\n", -5));
-	printf(" 06.*x: %i\n", ft_printf("[%06.*x]\n", -5, 5));
-	printf(" 06.*x: %i\n\n", printf("[%06.*x]\n", -5, 5));
+	printf(" .*i: %i\n\n", printf("[%.-5i]\n", -5)); */
+	printf(" 06.*i: %i\n", ft_printf("[%06.*i]\n", -5, 5));
+	printf(" 06.*i: %i\n\n", printf("[%06.*i]\n", -5, 5));
+	printf(" .3s: %i\n", ft_printf("[%.3s]\n", NULL));
+	printf(" .3s: %i\n\n", printf("[%.3s]\n", NULL));
+	/*
+	// fails
+	printf("fails in dustin's tests\n");
+	printf("[%d]\n", printf("REAL [%05.0d]", 0));
+	printf("[%d]\n", ft_printf("MINE [%05.0d]", 0)); 
+    printf("[%d]\n", printf("undefined behaviour: REAL [% ]"));
+	printf("[%d]\n", ft_printf("undefined behaviour: MINE [% ]")); */
+	/* 
 	// implicit precision tests with number != 0
 	printf("implicit precision tests:\n");
 	printf("implicit precision tests with number != 0\n");
@@ -137,7 +148,7 @@ int		main(void)
 	printf(" *.u: %i\n\n", printf("[%*.u]\n", -5, 5));
 	// p
 	printf(" *.p: %i\n", ft_printf("[%*.p]\n", -5, 5));
-	printf(" *.p: %i\n\n", printf("[%*.p]\n", -5, 5));
+	printf(" *.p: %i\n\n", printf("[%*.p]\n", -5, 5)); */
 	/* 
 	//failed on dustin's tests
 	printf(" 05.0d: %i\n", ft_printf("[%05.0d]\n", 0));
