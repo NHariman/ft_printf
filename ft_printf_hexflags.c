@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 18:38:45 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/11 17:17:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/12 23:22:43 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static long			ft_hexlen(long n)
 static void			ft_hexpadlen(unsigned long n, long *padlen, t_flag *flags)
 {
 	if (flags->dot && flags->pre < 0)
+	{
 		flags->pre = -1;
+		flags->dot = 0;
+	}
 	if (flags->dot && flags->pre <= 0 && n == 0)
 		*padlen = flags->pad;
 	else if (flags->dot && n < 0)
@@ -55,9 +58,8 @@ void				ft_hex(char c, unsigned long n, int *count, t_flag *flags)
 
 	padlen = 0;
 	ft_hexpadlen(n, &padlen, flags);
-	if ((!flags->dash && !flags->zero) ||
-			(!flags->dash && flags->zero && (flags->pre > 0 ||
-								(flags->pre == 0 && n == 0))))
+	if ((!flags->dash && !flags->zero)|| 
+		(!flags->dash && flags->zero && flags->dot))
 		ft_pad(padlen, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
 		ft_padzero(padlen, count);
@@ -77,9 +79,8 @@ void				ft_ptr(unsigned long n, int *count, t_flag *flags)
 
 	padlen = 0;
 	ft_hexpadlen(n, &padlen, flags);
-	if ((!flags->dash && !flags->zero) ||
-			(!flags->dash && flags->zero && (flags->pre > 0 ||
-								(flags->pre == 0 && n == 0))))
+	if ((!flags->dash && !flags->zero)|| 
+		(!flags->dash && flags->zero && flags->dot))
 		ft_pad(padlen - 2, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
 		ft_padzero(padlen, count);
