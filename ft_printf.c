@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/06 15:15:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/12 23:34:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ static void			ft_format(const char c, va_list argp,
 {
 	if (c == '\0')
 		return ;
-	if (c == '%')
+	else if (c == '%')
 		ft_print_char(c, count, flags);
-	if (c == 'c')
+	else if (c == 'c')
 		ft_print_char(va_arg(argp, int), count, flags);
-	if (c == 'p')
+	else if (c == 'p')
 		ft_ptr((unsigned long)va_arg(argp, void *), count, flags);
-	if (c == 's')
+	else if (c == 's')
 		ft_print_str(va_arg(argp, char *), count, flags);
-	if (ft_strchr("di", c))
+	else if (ft_strchr("di", c))
 		ft_signed((long)va_arg(argp, int), count, flags);
-	if (c == 'u')
+	else if (c == 'u')
 		ft_unsigned((unsigned int)va_arg(argp, int), count, flags);
-	if (ft_strchr("xX", c))
+	else if (ft_strchr("xX", c))
 		ft_hex(c, (unsigned int)va_arg(argp, int), count, flags);
 }
 
@@ -43,7 +43,7 @@ static void			ft_reset_flags(t_flag *flags)
 	flags->pad = -1;
 }
 
-void				ft_vprintf(const char *format, va_list argp, int *count)
+static void			ft_vprintf(const char *format, va_list argp, int *count)
 {
 	int			i;
 	t_flag		flags;
