@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 15:52:44 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/15 23:52:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/16 00:27:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int		main(void)
 	printf("[%d]\n", ft_printf("MINE [%.0d]",  0)); 
     printf("[%d]\n", printf(   "REAL [%5.d]",  0));
 	printf("[%d]\n", ft_printf("MINE [%5.d]",  0));  
-    printf("[%d]\n", printf(   "REAL [%05.d]",  0));
-	printf("[%d]\n", ft_printf("MINE [%05.d]",  0));  
+    printf("[%d]\n", printf(   "REAL [%055.d]",  0));
+	printf("[%d]\n", ft_printf("MINE [%055.d]",  0));  
 	
 	
 /* 
