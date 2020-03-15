@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 15:52:44 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/12 22:15:02 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/03/15 23:52:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,103 +60,27 @@ int		main(void)
 	printf("fails in dustin's tests\n");
 	printf("[%d]\n", printf("REAL [%05.0d]", 0));
 	printf("[%d]\n", ft_printf("MINE [%05.0d]", 0)); 
-    printf("[%d]\n", printf("undefined behaviour: REAL [% ]"));
-	printf("[%d]\n", ft_printf("undefined behaviour: MINE [% ]")); 
+    printf("[%d]\n", printf(   "REAL [%05.0d]", 5));
+	printf("[%d]\n", ft_printf("MINE [%05.0d]", 5));
+    printf("[%d]\n", printf(   "REAL [%5.0d]",  5));
+	printf("[%d]\n", ft_printf("MINE [%5.0d]",  5));
+    printf("[%d]\n", printf(   "REAL [%-5.0d]",  5));
+	printf("[%d]\n", ft_printf("MINE [%-5.0d]",  5));
+    printf("[%d]\n", printf(   "REAL [%5.5d]",  5));
+	printf("[%d]\n", ft_printf("MINE [%5.5d]",  5)); 
+    printf("[%d]\n", printf(   "REAL [%5.5d]",  0));
+	printf("[%d]\n", ft_printf("MINE [%5.5d]",  0));
+    printf("[%d]\n", printf(   "REAL [%.5d]",  0));
+	printf("[%d]\n", ft_printf("MINE [%.5d]",  0));
+    printf("[%d]\n", printf(   "REAL [%.0d]",  0));
+	printf("[%d]\n", ft_printf("MINE [%.0d]",  0)); 
+    printf("[%d]\n", printf(   "REAL [%5.d]",  0));
+	printf("[%d]\n", ft_printf("MINE [%5.d]",  0));  
+    printf("[%d]\n", printf(   "REAL [%05.d]",  0));
+	printf("[%d]\n", ft_printf("MINE [%05.d]",  0));  
 	
-	// implicit precision tests with number != 0
-	printf("implicit precision tests:\n");
-	printf("implicit precision tests with number != 0\n");
-	// c
-	printf(" .c: %i\n", ft_printf("[%.c]\n", 'c'));
-	printf(" .c: %i\n\n", printf("[%.c]\n", 'c'));
-	// s
-	printf(" .s: %i\n", ft_printf("[%.s]\n", "hello world!"));
-	printf(" .s: %i\n\n", printf("[%.s]\n", "hello world!"));
-	// x
-	printf(" .x: %i\n", ft_printf("[%.x]\n", 5));
-	printf(" .x: %i\n\n", printf("[%.x]\n", 5));
-	// i
-	printf(" .i: %i\n", ft_printf("[%.i]\n", 5));
-	printf(" .i: %i\n\n", printf("[%.i]\n",5));
-	// u
-	printf(" .u: %i\n", ft_printf("[%.u]\n", 5));
-	printf(" .u: %i\n\n", printf("[%.u]\n",5));
-	// p
-	printf(" .p: %i\n", ft_printf("[%.p]\n", 5));
-	printf(" .p: %i\n\n", printf("[%.p]\n",5));
-	// implicit precision with number == 0
-	printf("implicit precision with number == 0\n");
-		// x
-	printf(" .x: %i\n", ft_printf("[%.x]\n", 0));
-	printf(" .x: %i\n\n", printf("[%.x]\n", 0));
-	// i
-	printf(" .i: %i\n", ft_printf("[%.i]\n", 0));
-	printf(" .i: %i\n\n", printf("[%.i]\n",0));
-	// u
-	printf(" .u: %i\n", ft_printf("[%.u]\n", 0));
-	printf(" .u: %i\n\n", printf("[%.u]\n",0));
-	// p
-	printf(" .p: %i\n", ft_printf("[%.p]\n", 0));
-	printf(" .p: %i\n\n", printf("[%.p]\n",0));
-	// implicit precision with specified, with number == 0
-	printf("implicit precision with specified width, number == 0\n");
-	printf(" 5.c: %i\n", ft_printf("[%5.c]\n", 'c'));
-	printf(" 5.c: %i\n\n", printf("[%5.c]\n", 'c'));
-	// s
-	printf(" 5.s: %i\n", ft_printf("[%5.s]\n", "hello world!"));
-	printf(" 5.s: %i\n\n", printf("[%5.s]\n", "hello world!"));
-		// x
-	printf(" 5.x: %i\n", ft_printf("[%5.x]\n", 0));
-	printf(" 5.x: %i\n\n", printf("[%5.x]\n", 0));
-	// i
-	printf(" 5.i: %i\n", ft_printf("[%5.i]\n", 0));
-	printf(" 5.i: %i\n\n", printf("[%5.i]\n",0));
-	// u
-	printf(" 5.u: %i\n", ft_printf("[%5.u]\n", 0));
-	printf(" 5.u: %i\n\n", printf("[%5.u]\n",0));
-	// p
-	printf(" 5.p: %i\n", ft_printf("[%5.p]\n", 0));
-	printf(" 5.p: %i\n\n", printf("[%5.p]\n", 0));
-	// implicit precision with specified width, number != 0
-	printf("implicit precision with specified width, number != 0\n");
-	printf(" 5.x: %i\n", ft_printf("[%5.x]\n", 5));
-	printf(" 5.x: %i\n\n", printf("[%5.x]\n", 5));
-	// i
-	printf(" 5.i: %i\n", ft_printf("[%5.i]\n", 5));
-	printf(" 5.i: %i\n\n", printf("[%5.i]\n",5));
-	// u
-	printf(" 5.u: %i\n", ft_printf("[%5.u]\n", 5));
-	printf(" 5.u: %i\n\n", printf("[%5.u]\n",5));
-	// p
-	printf(" 5.p: %i\n", ft_printf("[%5.p]\n", 5));
-	printf(" 5.p: %i\n\n", printf("[%5.p]\n",5));
-	// implicit precision with positive astrix width, number != 0
-	printf("implicit precision with positive astrix width, number != 0\n");
-	printf(" *.x: %i\n", ft_printf("[%*.x]\n",5, 5));
-	printf(" *.x: %i\n\n", printf("[%*.x]\n", 5 ,5));
-	// i
-	printf(" *.i: %i\n", ft_printf("[%*.i]\n", 5, 5));
-	printf(" *.i: %i\n\n", printf("[%*.i]\n", 5, 5));
-	// u
-	printf(" *.u: %i\n", ft_printf("[%*.u]\n", 5, 5));
-	printf(" *.u: %i\n\n", printf("[%*.u]\n", 5, 5));
-	// p
-	printf(" *.p: %i\n", ft_printf("[%*.p]\n", 5, 5));
-	printf(" *.p: %i\n\n", printf("[%*.p]\n", 5, 5));
-	// implicit precision with negative astrix width, number != 0
-	printf("implicit precision with negative astrix width, number != 0\n");
-	printf(" *.x: %i\n", ft_printf("[%*.x]\n",-5, 5));
-	printf(" *.x: %i\n\n", printf("[%*.x]\n", -5 ,5));
-	// i
-	printf(" *.i: %i\n", ft_printf("[%*.i]\n", -5, 5));
-	printf(" *.i: %i\n\n", printf("[%*.i]\n", -5, 5));
-	// u
-	printf(" *.u: %i\n", ft_printf("[%*.u]\n", -5, 5));
-	printf(" *.u: %i\n\n", printf("[%*.u]\n", -5, 5));
-	// p
-	printf(" *.p: %i\n", ft_printf("[%*.p]\n", -5, 5));
-	printf(" *.p: %i\n\n", printf("[%*.p]\n", -5, 5)); 
-	/* 
+	
+/* 
 	//failed on dustin's tests
 	printf(" 05.0d: %i\n", ft_printf("[%05.0d]\n", 0));
 	printf(" 05.0d: %i\n\n", printf("[%05.0d]\n", 0));
@@ -165,8 +89,9 @@ int		main(void)
 	printf(" 05.0X: %i\n", ft_printf("[%05.0X]\n", 0));
 	printf(" 05.0X: %i\n\n", printf("[%05.0X]\n", 0));
 	printf(" 4.10.4d: %i\n", ft_printf("[%4.10.4d]\n", 0));
-	printf(" 4.10.4d: %i\n\n", printf("[%4.10.4d]\n", 0)); */
-/* 
+	printf(" 4.10.4d: %i\n\n", printf("[%4.10.4d]\n", 0));
+*/
+/*
 	int i0 = 0;
 	int i1 = INT_MIN;
 	int i2 = INT_MAX;
@@ -198,7 +123,7 @@ int		main(void)
 	printf("only strings:\n");
 	ret_own =   ft_printf("%42.21s%s%s%s%s|\n", s0, s1, s2, s3, s4);
 	ret_original = printf("%42.21s%s%s%s%s|\n",  s0, s1, s2, s3, s4);
-	printf("%sFinal return values of the boss fight:\nft_printf: %d\n   printf: %d%s\n", KGRN, ret_own, ret_original, KNRM);
+	printf("%sFinal return values of the boss fight:\nft_printf: %d\n   printf: %d%s\n", KGRN, ret_own, ret_original, KNRM); x
 
 	printf("everything else\n");
 	ret_own =   ft_printf("|%-10.d %-.5d %d ABC  %% %24.12d %          %00%        %%    %5.4%  %%%-.5%%%   %020%           % %0.20% %020% \n", i0, i1, i2, i3, i4, i5, i6, ui0, ui1, ui2, ui3, ui4, c0, c1, c2, c3);
