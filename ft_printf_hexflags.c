@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/02 18:38:45 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/12 23:22:43 by nhariman      ########   odam.nl         */
+/*   Created: 2020/03/02 18:38:45 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/04/24 18:31:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				ft_hex(char c, unsigned long n, int *count, t_flag *flags)
 
 	padlen = 0;
 	ft_hexpadlen(n, &padlen, flags);
-	if ((!flags->dash && !flags->zero)|| 
+	if ((!flags->dash && !flags->zero) ||
 		(!flags->dash && flags->zero && flags->dot))
 		ft_pad(padlen, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
@@ -79,7 +79,7 @@ void				ft_ptr(unsigned long n, int *count, t_flag *flags)
 
 	padlen = 0;
 	ft_hexpadlen(n, &padlen, flags);
-	if ((!flags->dash && !flags->zero)|| 
+	if ((!flags->dash && !flags->zero) ||
 		(!flags->dash && flags->zero && flags->dot))
 		ft_pad(padlen - 2, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)

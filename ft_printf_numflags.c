@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/28 17:34:50 by nhariman       #+#    #+#                */
-/*   Updated: 2020/03/12 23:04:49 by nhariman      ########   odam.nl         */
+/*   Created: 2020/02/28 17:34:50 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/04/24 18:29:38 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void				ft_signed(long n, int *count, t_flag *flags)
 	dashpad.onbr = n;
 	dashpad.padlen = 0;
 	ft_padlen(n, &dashpad.padlen, flags);
-	if ((!flags->dash && !flags->zero)|| 
+	if ((!flags->dash && !flags->zero) ||
 		(!flags->dash && flags->zero && flags->dot))
 		ft_pad(dashpad.padlen, count);
 	ft_print_negative(&n, count);
@@ -101,7 +101,7 @@ void				ft_unsigned(unsigned long n, int *count, t_flag *flags)
 	if (*count < 0)
 		return ;
 	ft_padlen(n, &padlen, flags);
-	if ((!flags->dash && !flags->zero)|| 
+	if ((!flags->dash && !flags->zero) ||
 		(!flags->dash && flags->zero && flags->dot))
 		ft_pad(padlen, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
