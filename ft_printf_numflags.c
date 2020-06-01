@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/04/24 18:29:38 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/05/14 18:26:54 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static long			ft_numlen(long n)
 static void			ft_padlen(long n, long *padlen, t_flag *flags)
 {
 	if (flags->dot && flags->pre < 0)
-	{	
+	{
 		flags->pre = -1;
 		flags->dot = 0;
 	}
